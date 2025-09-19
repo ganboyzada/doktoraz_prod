@@ -86,15 +86,76 @@ class FrontController extends Controller
     }
 
     public function services(){
-        return view('front.services');
+        $trans_ids = [];
+
+        $departments = Department::with('categories')->get();
+
+        foreach($departments as $dep){
+            foreach(['name', 'meta_tags'] as $translatable){
+                $trans_ids[] = $dep->{$translatable};
+            }
+            foreach($dep->categories as $service){
+                $trans_ids[] = $service->name;
+            }
+        }
+
+        $translations_temp = Translation::select(['trans_id', 'value'])->whereIn('trans_id', $trans_ids)->where('lang', app()->getLocale())->get()->toArray();
+        $translations = array_combine(array_column($translations_temp, 'trans_id'), array_column($translations_temp, 'value'));
+
+        return view('front.services', compact(['translations','departments']));
     }
 
     public function service($slug){
-        return view('front.service');
+        $trans_ids = [];
+        $service = Category::where('slug', $slug)->first();
+        $related_services = Category::where('parent_id', $service->parent_id)->get();
+
+        foreach(['name', 'desc'] as $translatable){
+            $trans_ids[] = $service->{$translatable};
+            $trans_ids[] = $service->department->{$translatable};
+        }
+
+        foreach($service->members as $member){
+            foreach(['designation'] as $translatable){
+                $trans_ids[] = $service->{$translatable};
+            }
+        }
+        foreach($related_services as $rel_service){
+            foreach(['name'] as $translatable){
+                $trans_ids[] = $rel_service->{$translatable};
+            }
+        }
+
+        $translations_temp = Translation::select(['trans_id', 'value'])->whereIn('trans_id', $trans_ids)->where('lang', app()->getLocale())->get()->toArray();
+        $translations = array_combine(array_column($translations_temp, 'trans_id'), array_column($translations_temp, 'value'));
+
+        return view('front.service', compact(['translations','service', 'related_services']));
     }
 
     public function doctors(){
-        return view('front.doctors');
+        $trans_ids = [];
+        $featured_doctors = Member::where('classified', true)->get();
+        $doctors = Member::get();
+        $services = Category::get();
+
+        foreach($doctors as $doctor){
+            foreach(['designation'] as $translatable){
+                $trans_ids[] = $doctor->{$translatable};
+            }
+            foreach(['name'] as $translatable){
+                $trans_ids[] = $doctor->category->{$translatable};
+            }
+        }
+        foreach($services as $service){
+            foreach(['name'] as $translatable){
+                $trans_ids[] = $service->{$translatable};
+            }
+        }
+
+        $translations_temp = Translation::select(['trans_id', 'value'])->whereIn('trans_id', $trans_ids)->where('lang', app()->getLocale())->get()->toArray();
+        $translations = array_combine(array_column($translations_temp, 'trans_id'), array_column($translations_temp, 'value'));
+
+        return view('front.doctors', compact(['translations','doctors', 'featured_doctors', 'services']));
     }
 
     public function about_us(){

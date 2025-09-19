@@ -1,6 +1,6 @@
 @extends('front.layouts.master')
 
-@section('page_title', s_trans('About us').' - Doktor.az Klinika')
+@section('page_title', s_trans('Haqqımızda').' - Doktor.az Klinika')
 {{-- @section('meta_tags', $translations[$page_meta->meta_tags]) --}}
 {{-- @section('meta_desc', $translations[$page_meta->meta_desc]) --}}
 
@@ -13,17 +13,17 @@
                 <img src="{{ asset('front/img/bg_about.png') }}" alt="" class="tile-bg">
                 <a href="{{ route('home') }}" class="btn btn-adaptive">
                     <i data-feather="chevron-left"></i>
-                    Ana səhifə
+                    {{ s_trans('Ana səhifə') }}
                 </a>
                 <div class="mt-auto">
-                    <h2 class="text-3xl md:text-4xl font-semibold">Haqqımızda</h2>
-                    <div class="mt-2 opacity-75">Doktor.az Klinikası</div>
+                    <h2 class="text-3xl md:text-4xl font-semibold">{{ s_trans('Haqqımızda') }}</h2>
+                    <div class="mt-2 opacity-75">{{ s_trans('Doktor.az Klinikası') }}</div>
                 </div>
             </div>
             <div class="tile block xl:row-span-7 pl-3 md:pl-6 pr-0 pt-0 pb-6">
                 <div class="swiper doc-slider h-full" id="doc_slider">
                     <div class="mt-5 mb-3 pl-3 md:pl-0">
-                        <h2 class="text-xl font-semibold">Qalereya</h2>
+                        <h2 class="text-xl font-semibold">{{ s_trans('Qalereya') }}</h2>
                     </div>
                     <div class="swiper-wrapper">
                         @foreach (['Dr Etiram Musayev', 'Dr Xumar Muradova', 'Dr Əli Zamanov'] as $k=>$slide)

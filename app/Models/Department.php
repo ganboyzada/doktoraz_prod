@@ -10,10 +10,6 @@ class Department extends Model
     use HasFactory;
 
     public function categories(){
-        return $this->hasMany(Category::class, 'id', 'parent_id');
-    }
-
-    public function headingMember(){
-        return $this->hasOne(Member::class, 'id', 'heading_member');
+        return $this->hasMany(Category::class, 'parent_id');
     }
 }

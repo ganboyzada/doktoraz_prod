@@ -30,6 +30,9 @@ class CategoryController extends Controller
                 'type'=>'trans',
                 'editor'=>true
             ],
+            'icon'=>[
+                'type'=>'img',
+            ],
             'photo'=>[
                 'type'=>'img',
             ],
@@ -54,7 +57,7 @@ class CategoryController extends Controller
             'slug'=>[
                 'type'=>'text',
             ],
-            'photo'=>[
+            'icon'=>[
                 'type'=>'img',
             ],
             'published'=>[

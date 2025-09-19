@@ -17,9 +17,12 @@ class ContentController extends Controller
                 'type'=>'select',
                 'list'=>[
                     'section',
+                    'mobile',
                     'phone',
+                    'ambulance',
                     'address',
                     'email',
+                    'gallery'
                 ]
             ],
             'name'=>[

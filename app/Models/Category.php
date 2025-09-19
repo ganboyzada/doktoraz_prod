@@ -9,11 +9,11 @@ class Category extends Model
 {
     use HasFactory;
 
-    public function parent(){
-        return $this->belongsTo(Department::class, 'id', 'parent_id');
+    public function department(){
+        return $this->belongsTo(Department::class, 'parent_id');
     }
 
-    public function products(){
-        return $this->hasMany(Project::class);
+    public function members(){
+        return $this->hasMany(Member::class);
     }
 }

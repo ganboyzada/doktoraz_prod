@@ -23,7 +23,7 @@
 
     @stack('css')
 </head>
-<body class="sm:h-screen sm:max-h-screen py-7 px-2 sm:px-5 xl:px-16 antialiased">
+<body class="sm:h-screen sm:max-h-screen py-7 px-1 sm:px-5 xl:px-16 antialiased">
     @include('front.layouts.header')
 
     @yield('main')

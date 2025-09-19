@@ -8,22 +8,19 @@
         <title>{{ config('app.name', 'Laravel') }}</title>
 
         <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-
         <link href="{{ asset('inno/css/bootstrap.min.css') }}" rel="stylesheet">
         <!-- Scripts -->
-        @vite(['resources/sass/admin.scss','resources/js/admin.js'])
+        @vite(['resources/scss/admin.scss','resources/js/admin.js'])
     </head>
     <body>
         <div class="vh-100 d-flex flex-column justify-content-center align-items-center bg-light">
             
-
-            <div class="mt-6 bg-white shadow-md overflow-hidden">
-                <div class="bg-dark w-100 py-3 px-4 inno-logo">
+            <div class="bg-white rounded p-4 shadow overflow-hidden" style="width: 400px; max-width: 90vw;"">
+                <div class="w-100 inno-logo">
                     <a href="/">
                         <x-application-logo height="40" />
                     </a>
+                    <span class="powered-by">Powered by <img class="ms-1 h-28" src="{{ asset('inno/img/logo_dark.svg') }}" alt="innopanel_logo" ></span>
                 </div>
                 {{ $slot }}
             </div>

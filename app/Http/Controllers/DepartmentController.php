@@ -28,14 +28,12 @@ class DepartmentController extends Controller
             'slug'=>[
                 'type'=>'text',
             ],
+            'color'=>[
+                'type'=>'text',
+            ],
             'desc'=>[
                 'type'=>'trans',
                 'editor'=>true
-            ],
-            'heading_member'=>[
-                'type'=>'select',
-                'model'=>'\Member',
-                'column'=>'first_name'
             ],
             'photo'=>[
                 'type'=>'img',
@@ -61,6 +59,9 @@ class DepartmentController extends Controller
                 'type'=>'trans',
             ],
             'slug'=>[
+                'type'=>'text',
+            ],
+            'color'=>[
                 'type'=>'text',
             ],
             'photo'=>[

@@ -8,12 +8,16 @@
         </span>
     </a>
     <div class="relative inline-block lang-switch hidden md:inline" x-data="{ open: false }">
-        <button class="btn btn-waterdrop" @click="open = !open">
-            <i data-feather="globe"></i>AZE
+        <button class="btn btn-waterdrop uppercase" @click="open = !open">
+            <i data-feather="globe"></i>{{ app()->getLocale() }}
         </button>
         <div x-show="open" @click.outside="open = false"
-       class="absolute mt-2 w-full bg-white text-center rounded-full shadow-md">
-            <a href="#" class="block px-4 py-2 rounded-full hover:bg-blue-700 hover:text-white">RUS</a>
+       class="absolute mt-2 bg-white text-center radius-x shadow-md">
+            @foreach ($languages as $lang)
+                @if($lang->code != app()->getLocale())
+                <a href="{{ route('langswitch', $lang->code) }}" class="capitalize block px-4 py-2 rounded-full hover:bg-blue-700 hover:text-white">{{ $lang->title }}</a>
+                @endif
+            @endforeach
         </div>
     </div>
     <div class="action-button hidden md:inline">

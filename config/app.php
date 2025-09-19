@@ -83,8 +83,8 @@ return [
     |
     */
 
-    'locale' => 'en',
-    'inno_lang' => 'en',
+    'locale' => 'az',
+    'inno_lang' => 'az',
     'inno_modules' => [
         // 'media' => 'image',
         'contents' => 'info-square',

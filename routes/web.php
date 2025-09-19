@@ -40,10 +40,10 @@ Route::get('/sitemap', [FrontController::class, 'sitemap'])->name('sitemap');
 
 Route::group(['middleware' => ['lang']], function () {
     Route::get('/', [FrontController::class, 'home'])->name('home');
-    Route::get('/services', [FrontController::class, 'services'])->name('services');
-    Route::get('/services/{slug}', [FrontController::class, 'service'])->name('services.find');
-    Route::get('/doctors', [FrontController::class, 'doctors'])->name('doctors');
-    Route::get('/about-us', [FrontController::class, 'about_us'])->name('about_us');
+    Route::get('/xidmetler', [FrontController::class, 'services'])->name('services');
+    Route::get('/xidmetler/{slug}', [FrontController::class, 'service'])->name('services.find');
+    Route::get('/hekimler', [FrontController::class, 'doctors'])->name('doctors');
+    Route::get('/haqqimizda', [FrontController::class, 'about_us'])->name('about_us');
 });
 
 // Admin Panel

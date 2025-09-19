@@ -42,12 +42,12 @@
     "src": "resources/js/app.js"
   },
   "resources/scss/admin.scss": {
-    "file": "assets/admin-bb32938d.css",
+    "file": "assets/admin-ba82f34a.css",
     "isEntry": true,
     "src": "resources/scss/admin.scss"
   },
   "resources/scss/app.scss": {
-    "file": "assets/app-59f15802.css",
+    "file": "assets/app-d0e7dd24.css",
     "isEntry": true,
     "src": "resources/scss/app.scss"
   }

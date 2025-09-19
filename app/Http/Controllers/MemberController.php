@@ -18,7 +18,7 @@ class MemberController extends Controller
             ],
             'category_id'=>[
                 'type'=>'select',
-                'model'=>'\Department',
+                'model'=>'\Category',
             ],
             'first_name'=>[
                 'type'=>'text',
