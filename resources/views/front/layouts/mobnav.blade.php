@@ -27,19 +27,19 @@
         <div class="mt-6 mb-auto grid grid-cols-2 gap-2 auto-rows-[90px]">
             @php
                 $links = [
-                    'Xidmətlər'=>[
+                    'xidmetler-basliq'=>[
                         'route'=>'services',
                         'icon'=>'grid',   
                     ],
-                    'Həkimlər' => [
+                    'hekimler-basliq' => [
                         'route'=>'doctors',
                         'icon'=>'users',   
                     ],
-                    'Haqqımızda' => [
+                    'haqqimizda-basliq' => [
                         'route' => 'about_us',
                         'icon' => 'info',   
                     ],
-                    'Xəbərlər' => [
+                    'xeberler-basliq' => [
                         'route'=>null,
                         'icon'=>'radio',   
                     ]
@@ -48,7 +48,7 @@
             @foreach ($links as $title=>$detail)
             <a href="{{ $detail['route'] ? route($detail['route']) : '' }}" class="tile shadow-lg bg-trans py-3 px-4">
                 <i class="absolute bottom-3 right-4 text-white-500 opacity-50" width=40 height=40 stroke-width=0.5 data-feather="{{ $detail['icon'] }}"></i>
-                <span class="font-semibold">{{ $title }}</span>
+                <span class="font-semibold">{!! s_trans($title) !!}</span>
             </a>
             @endforeach
             <a href="#" class="tile shadow-lg bg-brand text-white py-3 px-4 h-[60px]">

@@ -30,6 +30,9 @@ class CategoryController extends Controller
                 'type'=>'trans',
                 'editor'=>true
             ],
+            'color'=>[
+                'type' => 'text',
+            ],
             'icon'=>[
                 'type'=>'img',
             ],
@@ -56,6 +59,9 @@ class CategoryController extends Controller
             ],
             'slug'=>[
                 'type'=>'text',
+            ],
+            'color'=>[
+                'type' => 'color',
             ],
             'icon'=>[
                 'type'=>'img',
@@ -119,7 +125,7 @@ class CategoryController extends Controller
         $fields = $this->fields();
 
         $editor = [
-            'title'=> 'name',
+            'title'=> 'slug',
             'module'=> self::MODULE,
             'item'=> Category::find($id),
         ];

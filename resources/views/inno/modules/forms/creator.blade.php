@@ -3,7 +3,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="staticBackdropLabel">Add new</h1>
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">{{ __('Add new') }}</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -13,7 +13,7 @@
                         @foreach ($fields as $field=>$config)
                         @if($config['type']!='hidden' && !isset($config['parse']))
                         <div class="mb-4 flex flex-col">
-                            <label class="mb-3" for="{{ $field }}">{{ ucfirst($field) }}</label>
+                            <label class="mb-3" for="{{ $field }}">{{ __(ucfirst($field)) }}</label>
 
                             @if($config['type']=='trans')
 

@@ -23,7 +23,7 @@
             <button type="button" class="back-to-categs mr-4 btn no-text btn-waterdrop w-[45px] h-[45px]"><i width="35" height="35" data-feather="chevron-left"></i></button>
             <h2 class="font-semibold">{{ $translations[$dep->name] }}</h2>
             <button type="button" class="browse-categ mr-4 btn btn-adaptive">
-                Xidmətlərə bax
+                {{ s_trans('shobe-duyme') }}
                 <i width="35" height="35" data-feather="chevron-right"></i></button>
         </div>
         

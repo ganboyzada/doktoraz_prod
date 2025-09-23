@@ -11,19 +11,14 @@
     <div class="tile sm:row-span-2 lg:row-span-8 xl:row-span-1">
         <div class="swiper" id="home_slider">
             <div class="swiper-wrapper">
-                @php
-                    $slides = [
-                        'Pediatrik Checkup paketimiz yenidən qüvvədə' => 'slide_2.png',
-                        'Laborator nəticələrini QR kod ilə əldə et' => 'slide_1.png',
-                    ]
-                @endphp
-                @foreach ($slides as $caption=>$img)
+               
+                @foreach ($slides as $slide)
                 <div class="swiper-slide">
-                    <img src="{{ asset('front/img/'.$img) }}" alt="">
+                    <img src="{{ media($slide->photo) }}" alt="">
                     <div class="slide-overlay">
-                        <div class="welcome-msg"><img src="{{ asset('front/img/logo_icon.svg') }}" alt="doktoraz_logo_ico">Hər vaxtınız xeyir olsun</div>
+                        <div class="welcome-msg"><img src="{{ asset('front/img/logo_icon.svg') }}" alt="doktoraz_logo_ico">{{ s_trans('ana-slayd-qarsilama') }}</div>
                         <div class="slide-caption w-[80%] md:w-[70%]">
-                         {{ $caption }}
+                         {!! $translations[$slide->title] !!}
                         </div>
                     </div>
                 </div>
@@ -43,17 +38,18 @@
             <img src="{{ asset('front/img/bg_services.png') }}" class="bg-services" alt="">
             <div class="tile-title vert w-[40%]">
                 <div>
-                    <h2 class="t-heading">Xidmətlər</h2>
-                    <div class="t-subheading">& şöbələr</div>
+                    <h2 class="t-heading">{!! s_trans('xidmetler-basliq', true) !!}</h2>
+                    <div class="t-subheading">{!! s_trans('xidmetler-alt-basliq') !!}</div>
                 </div>
-                <a href="{{ route('services') }}" class="mt-auto btn btn-over-dark btn-adaptive w-[70px] h-[45px]"><i width="25" height="25" stroke-width=1.5 data-feather="grid"></i></a>
+                <a href="{{ route('services') }}" class="mt-auto btn btn-over-dark btn-adaptive w-[70px] h-[45px]">
+                    <i width="25" height="25" stroke-width=1.5 data-feather="grid"></i></a>
             </div>
         </div>
         <div class="tile doctors row-span-5">
-            <div class="tile-title vert w-[40%]">
+            <div class="tile-title vert w-[50%]">
                 <div>
-                    <h2 class="t-heading">Həkimlər</h2>
-                    <div class="t-subheading">Peşəkar komandamız</div>
+                    <h2 class="t-heading">{!! s_trans('hekimler-basliq', true) !!}</h2>
+                    <div class="t-subheading">{!! s_trans('hekimler-alt-basliq') !!}</div>
                 </div>
                 <a href="{{ route('doctors') }}" class="mt-auto btn btn-over-dark btn-adaptive w-[70px] h-[45px]"><i width="25" height="25" stroke-width=1.5 data-feather="users"></i></a>
             </div>
@@ -71,8 +67,8 @@
         <div class="tile xl:row-span-2 sm:col-span-3 md:col-span-1">
             <div class="tile-title md:!py-1 w-full">
                 <div>
-                    <h2 class="t-heading">Haqqımızda</h2>
-                    <div class="t-subheading">Fəaliyyət tarixçəmiz</div>
+                    <h2 class="t-heading">{!! s_trans('haqqimizda-basliq', true) !!}</h2>
+                    <div class="t-subheading">{!! s_trans('haqqimizda-alt-basliq') !!}</div>
                 </div>
                 <a href="{{ route('about_us') }}" class="lg:ml-auto btn no-text btn-waterdrop w-[45px] h-[45px]"><i width="35" height="35" data-feather="chevron-right"></i></a>
             </div>
@@ -83,28 +79,34 @@
                     md:row-span-3 xl:row-span-6 
                     sm:col-span-5 md:col-span-1">
             <div class="tile-title vert relative">
-                <h2 class="t-heading">Əlaqə & Ünvan</h2>
+                <h2 class="t-heading">{!! s_trans('elaqe-basliq', true) !!}</h2>
             </div>
             <div class="contact-details grid grid-cols-2 gap-2 px-[1.6rem]">
                 <div id="mobile_numbers">
-                    <div class="text-sm mb-2 opacity-75">{{ s_trans('Mobil nömrələr') }}</div>
+                    <div class="text-sm mb-2 opacity-75">{{ s_trans('Mobil xəttlər') }}</div>
                     <div class="flex flex-col gap-2">
                     @foreach(($s_details['mobile'] ?? []) as $mobile)
-                    <a class="inline-flex border border-slate-200 bg-slate-100 radius-x py-1 px-3" href="tel:{{ str_replace(' ', '', $mobile['name']) }}">{{ $mobile['name'] }}</a>
+                    <a class="text-center flex items-center gap-2 border border-slate-300 radius-s py-2 px-3" 
+                        href="tel:{{ str_replace(' ', '', $mobile['name']) }}">
+                        <i data-feather="smartphone" width=20 height=20></i>
+                        {{ $mobile['name'] }}</a>
                     @endforeach
                     </div>
                 </div>
                 <div id="city_numbers" class="mb-2">
-                    <div class="text-sm mb-2 opacity-75">{{ s_trans('Şəhər nömrələri') }}</div>
+                    <div class="text-sm mb-2 opacity-75">{{ s_trans('Şəhər xəttləri') }}</div>
                     <div class="flex flex-col gap-2">
                     @foreach(($s_details['phone'] ?? []) as $phone)
-                    <a class="inline-flex border border-slate-200 bg-slate-100 radius-x py-1 px-3" href="tel:{{ str_replace(' ', '', $phone['name']) }}">{{ $phone['name'] }}</a>
+                    <a class="text-center flex items-center gap-2 border border-slate-300 radius-s py-2 px-3" 
+                        href="tel:{{ str_replace(' ', '', $phone['name']) }}">
+                        <i data-feather="phone" width=20 height=20></i>
+                        {{ $phone['name'] }}</a>
                     @endforeach
                     </div>
                 </div>
                 @foreach(($s_details['address'] ?? []) as $address)
-                <a href="{{ $address['link'] }}" class="col-span-2 flex gap-3 bg-slate-100 radius-x px-3 py-2">
-                    <i data-feather="map-pin"></i>
+                <a href="{{ $address['link'] }}" class="col-span-2 flex items-center gap-2 border border-slate-300 radius-s px-3 py-2 text-sm">
+                    <i height=20 data-feather="map-pin"></i>
                     {!! translate($address['value']) !!}
                 </a>  
                 @endforeach
@@ -131,7 +133,7 @@
 
             <img src="{{ asset('front/img/ambulance.png') }}" class="tile-bg" alt="ambulance_image">
             <div class="tile-title vert relative">
-                <h2 class="t-heading"><b>Təcili yardım</b> <br> Qaynar xətti</h2>
+                <h2 class="t-heading font-light">{!! s_trans('ambulans-basliq', true) !!}</h2>
             </div>
             
             <div class="flex mt-auto px-[1.6rem] pb-[1.6rem] gap-3 relative">

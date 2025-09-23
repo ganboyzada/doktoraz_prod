@@ -16,7 +16,7 @@
 
                 @if($config['type']!='hidden' && !isset($config['permanent']))
                 <div class="mb-4 flex flex-col">
-                    <label class="mb-3" for="{{ $field }}">{{ ucfirst($field) }}</label>
+                    <label class="mb-3" for="{{ $field }}">{{ __(ucfirst($field)) }}</label>
 
                     @if($config['type']=='trans')
                         @php

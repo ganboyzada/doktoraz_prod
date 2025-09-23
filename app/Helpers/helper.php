@@ -53,7 +53,8 @@ if (!function_exists('media')) {
 
     function s_trans($key, $tagged = false){
         
-        if(!session()->has('dictionary')){
+        if(true){
+        // if(!session()->has('dictionary')){
             $db_dict = Translation::select(['id', 'key', 'lang', 'value'])->where('static', true)->get()->toArray();
             session()->put('dictionary', json_encode($db_dict));
         }

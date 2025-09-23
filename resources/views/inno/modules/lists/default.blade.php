@@ -63,6 +63,9 @@
                 
                 @elseif ($config['type'] =='indicator')
                     <span class="badge text-bg-{{ $config['indicate'][$item->{$data}] }}">{{ ucfirst($item->{$data}) }}</span>
+
+                @elseif ($config['type'] =='color')
+                    <span style="display: inline-block; width: 16px; height: 16px; background: {{ $item->{$data} }};"></span>
                 @endif
             </td>
             @endforeach

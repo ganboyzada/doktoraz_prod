@@ -16,8 +16,8 @@
                     {{ s_trans('Ana səhifə') }}
                 </a>
                 <div class="mt-auto">
-                    <h2 class="text-3xl md:text-4xl font-semibold">{{ s_trans('Haqqımızda') }}</h2>
-                    <div class="mt-2 opacity-75">{{ s_trans('Doktor.az Klinikası') }}</div>
+                    <h2 class="text-3xl md:text-4xl font-semibold">{{ s_trans('haqqimizda-basliq') }}</h2>
+                    <div class="mt-2 opacity-75">{{ s_trans('DOKTOR.AZ KLİNİKASI') }}</div>
                 </div>
             </div>
             <div class="tile block xl:row-span-7 pl-3 md:pl-6 pr-0 pt-0 pb-6">
@@ -43,7 +43,7 @@
 			<div class="tile has-read-more flex-col p-6 pb-0">
                 <div class="flex items-center mb-3">
                     <i width="30" height="30" class="mr-3" data-feather="info" ></i>
-                    <h2 class="text-xl font-semibold">Ümumi Məlumat</h2>
+                    <h2 class="text-xl font-semibold">{{ s_trans('Ümumi Məlumat')}}</h2>
                 </div>
 
                 <div class="overflow-y-scroll h-full min-h-72">

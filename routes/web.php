@@ -42,7 +42,7 @@ Route::group(['middleware' => ['lang']], function () {
     Route::get('/', [FrontController::class, 'home'])->name('home');
     Route::get('/xidmetler', [FrontController::class, 'services'])->name('services');
     Route::get('/xidmetler/{slug}', [FrontController::class, 'service'])->name('services.find');
-    Route::get('/hekimler', [FrontController::class, 'doctors'])->name('doctors');
+    Route::get('/hekimler/{service?}', [FrontController::class, 'doctors'])->name('doctors');
     Route::get('/haqqimizda', [FrontController::class, 'about_us'])->name('about_us');
 });
 

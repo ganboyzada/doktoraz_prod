@@ -7,8 +7,13 @@
 <div class="md:h-[85vh]">
     <div class="grid lg:grid-cols-12 lg:grid-rows-1 gap-3 h-full">
         <div class="col-span-12 md:col-span-6 lg:col-span-6 xl:col-span-5 2xl:col-span-4 grid grid-cols-1 lg:grid-rows-12 gap-2 sm:gap-3">
-            <div class="tile service-intro flex-col items-start p-6 row-span-5 2xl:row-span-6" style="--service-color: #FF6B65;">
-                <img src="{{ media($service->photo) }}" alt="" class="tile-bg">
+            <div class="tile service-intro flex-col items-start p-6 row-span-5 2xl:row-span-6" style="--service-color: {{ $service->color ? $service->color : '#3D4871' }};">
+                @php
+                    $cover_photo = $service->photo ? $service->photo : $service->department->photo;
+                @endphp
+                @if($cover_photo)
+                <img src="{{ media($cover_photo) }}" alt="service_bg" class="tile-bg">
+                @endif
                 <a href="{{ route('services') }}" class="btn btn-adaptive">
                     <i data-feather="chevron-left"></i>
                     {{ s_trans('Bütün şöbələr') }}

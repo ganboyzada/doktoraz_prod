@@ -64,7 +64,7 @@ class MemberController extends Controller
             'last_name'=>[
                 'type'=>'text',
             ],
-            'photo_layer'=>[
+            'photo'=>[
                 'type'=>'img',
             ],
             'designation'=>[
@@ -130,7 +130,7 @@ class MemberController extends Controller
         $fields = $this->fields();
 
         $editor = [
-            'title'=> 'name',
+            'title'=> 'first_name',
             'module'=> self::MODULE,
             'item'=> Member::find($id),
         ];

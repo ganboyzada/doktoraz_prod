@@ -130,7 +130,7 @@ span.sep.vert{
           2px 2px 8px 0 rgba(#000, 0.2);
   
   backdrop-filter: blur(10px) saturate(2) brightness(1.2);
-  -webkit-backdrop-filter: blur(10px) saturate(2);
+  -webkit-backdrop-filter: blur(10px) saturate(2) brightness(1.2);
   color: #fff;
   &:before{
     content: '';
@@ -257,7 +257,10 @@ span.sep.vert{
     
     .t-heading{
       font-size: 24px;
-      font-weight: 400;
+      font-weight: 300;
+      b{
+        font-weight: 600;
+      }
     }
 
     .t-subheading{

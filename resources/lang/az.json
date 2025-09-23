@@ -17,9 +17,9 @@
     "Languages": "Dillər",
     "Translations": "Tərcümələr",
     "Media": "Medya",
-    "Members": "Komanda Üzvləri",
+    "Members": "Həkimlər",
     "Inquiries": "Müraciətlər",
-    "Socials": "Sosial Medya",
+    "Socials": "Sosiallar",
     "Id": "#",
     "Flag": "Bayraq",
     "Code": "Kod",
@@ -44,6 +44,13 @@
     "Meta_tags": "Etiketlər",
     "Lang": "Dil",
     "Key": "Açar söz",
-    "Value": "Dəyəri"
+    "Value": "Dəyəri",
+    "Slides": "Slaydlar",
+    "Contents": "Dəyişənlər",
+    "Branches": "Filiallar",
+    "Page_metas": "SEO Aləti",
+    "Color": "Rəng",
+    "Add new":"Yenisini yarat",
+    "Editing": "Redaktə olunur"
     
 }

@@ -62,7 +62,7 @@ class DepartmentController extends Controller
                 'type'=>'text',
             ],
             'color'=>[
-                'type'=>'text',
+                'type'=>'color',
             ],
             'photo'=>[
                 'type'=>'img',
