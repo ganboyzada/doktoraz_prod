@@ -47,7 +47,7 @@
     "src": "resources/scss/admin.scss"
   },
   "resources/scss/app.scss": {
-    "file": "assets/app-065da909.css",
+    "file": "assets/app-44b128da.css",
     "isEntry": true,
     "src": "resources/scss/app.scss"
   }
