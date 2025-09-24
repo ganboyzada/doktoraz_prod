@@ -31,11 +31,11 @@
                     </div>
                     <div class="swiper-wrapper">
                         @foreach ($service->members as $k=>$doctor)
-                        <div class="swiper-slide doctor">
+                        <a class="swiper-slide doctor" href="{{ route('doctors.find', $doctor->slug) }}">
                             <div class="doc-name text-sm"><b>{{ $doctor->first_name.' '.$doctor->last_name }}</b><br>{{ $translations[$doctor->designation] }}</div>
                             <img src="{{ media($doctor->photo) }}" alt="">
-                            <a href="#" class="btn btn-waterdrop btn-doc-detail"><i data-feather="info"></i></a>
-                        </div>
+                            <span class="btn btn-waterdrop btn-doc-detail"><i data-feather="info"></i></span>
+                        </a>
                         @endforeach
                         
                     </div>
@@ -80,11 +80,14 @@
                 <div class="mb-1 opacity-75">{{ $translations[$service->department->name] }}</div>
                 <h2 class="text-xl font-semibold">{{ s_trans('Digər sahələr') }}</h2>
             </div>
-            <div class="service-tiles grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-1 2xl:grid-cols-2 auto-rows-[40px] md:auto-rows-[60px] gap-3 overflow-y-scroll pb-32 px-6">
+            <div class="service-tiles grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-1 2xl:grid-cols-2 gap-3 overflow-y-scroll pb-32 px-6">
                 @foreach ($related_services as $rel_service)
                 <a href="{{ route('services.find', $rel_service->slug) }}" class="tile tile-service related-service">
-                    
+                    @if($rel_service->icon)
+                    <img src="{{ media($rel_service->icon) }}" alt="serv_id_{{ $rel_service->id }}_icon">
+                    @endif
                     <div class="tile-title">
+                        
                         {{ $translations[$rel_service->name] }} 
                     </div>
                 </a>   

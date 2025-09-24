@@ -34,7 +34,15 @@ class ObjectController extends Controller
                     if(isset($config['lang'])){
                         $parsableText = $request->{$config['parse'].'_'.$config['lang']};
                     }else{
-                        $parsableText = $request->{$config['parse']};
+                        if(count($config['parse'])){
+                            $parsableText = '';
+                            foreach($config['parse'] as $parsable){
+                                $parsableText .= $request->{$parsable} . ' ';
+                            }
+                            $parsableText .= Str::random(6);
+                        } else{
+                            $parsableText = $request->{$config['parse']};
+                        }
                     }
                     $item->{$field} = Str::slug($parsableText, $config['delimiter']);
                 } else{

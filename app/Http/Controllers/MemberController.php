@@ -26,6 +26,11 @@ class MemberController extends Controller
             'last_name'=>[
                 'type'=>'text',
             ],
+            'slug'=>[
+                'type' => 'slug',
+                'parse'=> ['first_name', 'last_name'],
+                'delimiter'=> '-',
+            ],
             'desc'=>[
                 'type'=>'trans',
                 'editor'=>true,
@@ -66,6 +71,9 @@ class MemberController extends Controller
             ],
             'photo'=>[
                 'type'=>'img',
+            ],
+            'slug' => [
+                'type' => 'text',
             ],
             'designation'=>[
                 'type'=>'trans',
@@ -130,7 +138,7 @@ class MemberController extends Controller
         $fields = $this->fields();
 
         $editor = [
-            'title'=> 'first_name',
+            'title'=> 'slug',
             'module'=> self::MODULE,
             'item'=> Member::find($id),
         ];

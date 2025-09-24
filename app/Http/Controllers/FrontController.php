@@ -52,14 +52,6 @@ class FrontController extends Controller
 
         $slides = Slide::where('featured', true)->get();
 
-        // $blogposts = Blog::take(5)->get();
-        // foreach($blogposts as $blogpost){
-        //     foreach(['title', 'excerpt'] as $translatable){
-        //         $trans_ids[] = $blogpost->{$translatable};
-        //     }
-        // }
-
-        $products = Product::where('out_of_stock', '!=', true)->where('featured', true)->orderBy('created_at', 'desc')->get();
         foreach($slides as $slide){
             foreach(['title'] as $translatable){
                 $trans_ids[] = $slide->{$translatable};
@@ -127,16 +119,16 @@ class FrontController extends Controller
         return view('front.service', compact(['translations','service', 'related_services']));
     }
 
-    public function doctors($service=null){
+    public function doctors(){
         $trans_ids = [];
-        $active_service = $service; 
+        $active_service = request('service'); 
         $services = Category::get();
         $featured_doctors = Member::where('classified', true)->get();
         
         $doctors_query = Member::query();
 
-        if($service){
-            $doctors_query->where('category_id', $service);
+        if($active_service){
+            $doctors_query->where('category_id', $active_service);
         }
 
         $doctors = $doctors_query->get();
@@ -159,6 +151,24 @@ class FrontController extends Controller
         $translations = array_combine(array_column($translations_temp, 'trans_id'), array_column($translations_temp, 'value'));
 
         return view('front.doctors', compact(['translations','doctors', 'featured_doctors', 'services', 'active_service']));
+    }
+
+    public function doctor($slug){
+        $trans_ids = [];
+        $doctor = Member::where('slug', $slug)->first();
+
+        foreach(['designation', 'desc'] as $translatable){
+            $trans_ids[] = $doctor->{$translatable};
+        }
+
+        foreach(['name'] as $translatable){
+            $trans_ids[] = $doctor->category->{$translatable};
+        }
+
+        $translations_temp = Translation::select(['trans_id', 'value'])->whereIn('trans_id', $trans_ids)->where('lang', app()->getLocale())->get()->toArray();
+        $translations = array_combine(array_column($translations_temp, 'trans_id'), array_column($translations_temp, 'value'));
+
+        return view('front.doctor', compact(['translations','doctor']));
     }
 
     public function about_us(){
