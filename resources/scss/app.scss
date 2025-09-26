@@ -11,6 +11,7 @@ $screen-md-min: 768px;
 $screen-lg-min: 1024px;
 // Large tablets and desktops
 $screen-xl-min: 1280px;
+$screen-2xl-min: 1536px;
 
 // Small devices
 @mixin sm {
@@ -42,6 +43,11 @@ $screen-xl-min: 1280px;
 // Extra large devices
 @mixin xl {
     @media (min-width: #{$screen-xl-min}) {
+        @content;
+    }
+}
+@mixin xxl {
+    @media (min-width: #{$screen-2xl-min}) {
         @content;
     }
 }
@@ -220,6 +226,13 @@ span.sep.vert{
       opacity: 0.25;
       filter: saturate(0);
     }
+    &.ambulance-bg{
+      height: 80%;
+      width: auto;
+      right: -24%;
+      bottom: 0.6rem;
+      filter: brightness(1.2);
+    }
   }
 
     .tile-title{
@@ -256,8 +269,12 @@ span.sep.vert{
 
     .t-subheading{
       margin-top: 0.2rem;
-      opacity: 0.8;
-      font-size: 1rem;
+      opacity: 0.6;
+      font-weight: 400;
+      font-size: 0.9rem;
+      @include xxl{
+        font-size: 1rem;
+      }
     }
   }
 
@@ -325,54 +342,35 @@ span.sep.vert{
 
   &.tile-service{
     display: flex;
-    padding: 1rem;
-    align-items: end;
-    border-radius: $radius_s;
+    align-items: center;
+    border-radius: $radius_x;
 
     .tile-title{
-      padding: 0;
-      font-size: 1rem;
+      padding: 0 0.8rem;
+      font-size: 1.2rem;
+      @include lg{
+        font-size: 1rem;
+        padding: 0 0.8rem;
+      }
       font-weight: 600;
       color: $body;
     }
 
-    .service-cover{
-      position: absolute;
-      right: 0;
-      top: 0;
-      height: 100%;
-      width: 40%;
+    .service-icon{
+      height: 100px;
       object-fit: contain;
     }  
 
     &.related-service{
-      align-items: center;
-      background-color: $master-bg;
-      box-shadow: inset -2px -2px 2.3px 1px #fff,
-              inset 4px 5px 2.6px -2px rgba(#000, 0.1),
-              3px 5px 8px 0 rgba(#000, 0.1);
-
-      padding: 0.4rem 0.6rem;
-      color: $body;
-      img{
-        height: 48px;
+      border-radius: $radius_s;
+      .service-icon{
+        height: 60px;
       }
       .tile-title{
+        font-weight: 400;
         font-size: 1rem;
-        font-weight: 500;
       }
-      &:before{
-        content: none;
-      }
-      &:hover{
-        transform: unset;
-        background-color: $brand-dark; 
-        box-shadow: inset 4px 5px 6.3px -1px #579AFF,
-              1px 4px 7px 1px rgba($brand-dark, 0.25);
-        .tile-title{
-          color: #fff;
-        }
-      }
+     
     }
   }
 
@@ -411,6 +409,13 @@ span.sep.vert{
       height: 30vh;
     }
   }
+
+  @include md(){
+    flex-wrap: wrap;
+  }
+  @include lg(){
+    flex-wrap: nowrap;
+  }
 }
 
 .department{
@@ -440,9 +445,11 @@ span.sep.vert{
       padding: 1rem 1.4rem;
     }
     @include md(){
-      padding: 1.4rem;
+      height: 33.333%;
+      padding: 3rem;
     }
     @include lg(){
+      height: auto;
       padding: 3rem;
     }
     
@@ -451,6 +458,7 @@ span.sep.vert{
     border-radius: $radius_x;
     background-color: #fff;
     box-shadow: 0 8px 15px -4px rgba(0,0,0,0.15);
+    
     h2{
       font-size: 1.6rem;
       font-weight: 600;
@@ -461,7 +469,7 @@ span.sep.vert{
       @include xs(){
         font-size: 1.6rem;
       }
-      @include lg(){
+      @include md(){
         font-size: 2.4rem;
       }
     }
@@ -473,7 +481,7 @@ span.sep.vert{
       position: absolute;
       bottom: 1.4rem;
       width: 90%;
-      border-radius: $radius_x $radius_x $radius_s $radius_s;
+      border-radius: 9999px;
       height: 3rem;
       justify-content: center;
       color: #fff;
@@ -536,6 +544,9 @@ span.sep.vert{
 
   &.active{
     .dep-title{
+      h2{
+        font-size: 24px;
+      }
       @include xs(){
         padding: 0 1rem;
 
@@ -543,6 +554,7 @@ span.sep.vert{
           font-size: 24px;
         }
       }
+      
     }
 
     .service-tiles{
@@ -604,17 +616,18 @@ span.sep.vert{
     }
 
     .slide-caption{
+      font-weight: 600;
       margin-top: 0.6rem;
       font-size: 1.4rem;
       @include md{
         font-size: 24px;
       }
       @include lg{
-        font-size: 28px;
         margin-top: 1.4rem;
         line-height: 140%;
       }
       @include xl{
+        font-size: 28px;
         margin-top: 1.6rem;
       }
       

@@ -34,7 +34,7 @@ class AppServiceProvider extends ServiceProvider
         View::share('socials', Social::get());
         View::share('settings', Setting::get()->keyBy('label'));
         
-        $types = ['mobile','phone','ambulance','address','email'];
+        $types = ['mobile','phone','ambulance','address','email', 'whatsapp'];
         $s_details = \App\Models\Content::whereIn('type', $types)
             ->get()
             ->groupBy('type')   // returns a Collection keyed by type

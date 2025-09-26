@@ -27,11 +27,11 @@
                 <i width="35" height="35" data-feather="chevron-right"></i></button>
         </div>
         
-        <div class="service-tiles grid grid-cols-2 md:grid-cols-4 auto-rows-[120px] gap-2 md:h-[90%]">
+        <div class="service-tiles grid md:grid-cols-2 lg:grid-cols-4 auto-rows-[100px] gap-2 sm:gap-3 md:h-[90%]">
             @foreach ($dep->categories as $service)
             <a href="{{ route('services.find', $service->slug) }}" class="tile tile-service">
                 @if($service->icon)
-                <img src="{{ media($service->icon) }}" class="service-cover" alt="">
+                <img src="{{ media($service->icon) }}" class="service-icon" alt="serv_id_{{ $service->id }}_icon">
                 @endif
                 <div class="tile-title">
                     {{ $translations[$service->name] }} 

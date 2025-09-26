@@ -20,6 +20,7 @@ class ContentController extends Controller
                     'mobile',
                     'phone',
                     'ambulance',
+                    'whatsapp',
                     'address',
                     'email',
                     'gallery'

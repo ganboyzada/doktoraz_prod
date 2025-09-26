@@ -8,7 +8,7 @@ import Swiper from 'swiper';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-import { Navigation, Pagination } from 'swiper/modules';
+import { Navigation, Pagination, Grid } from 'swiper/modules';
 
 // Replace all <i data-feather="icon-name"></i> with SVGs
 document.addEventListener("DOMContentLoaded", () => {
@@ -61,14 +61,13 @@ new Swiper('#home_slider', {
 });
 
 const swiper = new Swiper('#doc_slider', {
+  modules: [Navigation, Pagination],
     spaceBetween: 10,                 // adjust gap if you like
     slidesPerView: 3.1,               // 3 full + ~10% of next on larger screens
     navigation: {
       nextEl: '.swiper-button-next',
       prevEl: '.swiper-button-prev',
     },
-    // do not enable pagination (or leave it hidden via CSS)
-    // pagination: { el: '.swiper-pagination', enabled: false },
 
     breakpoints: {
       // mobile – 2 full slides + ~10% of the 3rd
@@ -77,7 +76,41 @@ const swiper = new Swiper('#doc_slider', {
       768:   { slidesPerView: 1.8 },
       // tablet & up – 3 full slides + ~10% of the 4th
       1024: { slidesPerView: 2.4 },
-      1280: { slidesPerView: 2.4 },
+      1280: { slidesPerView: 1.7 },
       1536: { slidesPerView: 2.4 }
+    }
+  });
+
+const swiper2 = new Swiper('#gallery_slider', {
+  modules: [Navigation, Pagination, Grid],
+    spaceBetween: 10,
+    slidesPerView: 1.2, 
+    grid: {
+      rows: 1,
+      fill: 'row'
+    },
+    navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
+
+    breakpoints: {
+      // mobile – 2 full slides + ~10% of the 3rd
+      768:   {
+        slidesPerView: 1.2,
+        grid: {
+          rows: 3,
+        },
+      },
+      // tablet & up – 3 full slides + ~10% of the 4th
+      1024: {
+        slidesPerView: 1.2,
+        grid: {
+          rows: 3,
+        },
+      },
+      1280: {
+        slidesPerView: 3,
+        grid: {
+          rows: 3,
+        },
+      }
     }
   });
