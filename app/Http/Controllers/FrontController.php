@@ -11,36 +11,71 @@ use App\Models\Faq;
 use Illuminate\Http\Request;
 use App\Models\Language;
 use App\Models\Member;
-use App\Models\Project;
 use App\Models\Slide;
-use App\Models\GalleryPost;
 use App\Models\PageMeta;
-use App\Models\Product;
 use App\Models\Translation;
 use Spatie\Sitemap\SitemapGenerator;
-use Dymantic\InstagramFeed\InstagramFeed;
 use App\Models\Setting;
+use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\Route;
+
 
 class FrontController extends Controller
 {
 
     public function switchLang($code){
-        $lang_setting = Setting::where('label', 'languages')->first();
-        if(isset($lang_setting) && $lang_setting->status){
-            if(in_array($code, Language::pluck('code')->toArray())){
-                session()->put('locale', $code);
-                
-                return back();
+        $allowed = config('app.available_locales');
+
+        if (!in_array($code, $allowed)) {
+            return back();
+        }
+
+        session(['locale' => $code]);
+
+        // Get previous URL
+        $previousUrl = url()->previous();
+
+        // Try to match previous URL to a named route
+        $request = app('request')->create($previousUrl);
+        $route = app('router')->getRoutes()->match($request);
+
+        $routeName = $route->getName(); // previous route name
+        $routeParams = $route->parameters(); // previous route parameters
+
+        if ($routeName) {
+            // Replace the lang in the route name if you use suffixes like home.az
+            $newRouteName = $this->replaceLangInRouteName($routeName, $code);
+
+            // Replace 'lang' param in route parameters
+            if (isset($routeParams['lang'])) {
+                $routeParams['lang'] = $code;
             }
-            else{
-                return back();
+
+            try {
+                return redirect()->route($newRouteName, $routeParams);
+            } catch (\Exception $e) {
+                // fallback to previous URL if route generation fails
+                return redirect($previousUrl);
             }
-        } 
-        return back();
+        }
+
+        // fallback
+        return redirect($previousUrl);
+    }
+
+    protected function replaceLangInRouteName(string $routeName, string $newLang): string
+    {
+        $pos = strrpos($routeName, '.');
+
+        if ($pos === false) {
+            return $routeName . '.' . $newLang;
+        }
+
+        return substr($routeName, 0, $pos + 1) . $newLang;
     }
 
     public function sitemap(){
-        SitemapGenerator::create('https://obsequio.ae')->writeToFile('sitemap.xml');
+        SitemapGenerator::create('https://doktoraz.az')->writeToFile('sitemap.xml');
     }
 
     public function home(){
@@ -187,7 +222,7 @@ class FrontController extends Controller
     }
 
     public function blog($deparment = null){
-        $page_meta = PageMeta::where('title', 'articles')->first();
+        $page_meta = PageMeta::where('title', 'xeberler')->first();
         $trans_ids = [];
         $trans_ids[]=$page_meta->meta_tags;
         $trans_ids[]=$page_meta->meta_desc;
@@ -208,7 +243,23 @@ class FrontController extends Controller
 
     public function blogpost($slug){
         $blogpost = Blog::where('slug', $slug)->firstOrFail();
-        return view('front.blogpost', compact(['blogpost']));
+        $related_posts = Blog::where('slug', '!=', $slug)->orderBy('created_at', 'desc')->get();
+        $trans_ids = [];
+
+        foreach(['title', 'excerpt', 'meta_tags', 'meta_desc', 'desc'] as $translatable){
+            $trans_ids[] = $blogpost->{$translatable};
+        }
+
+        foreach($related_posts as $rpost){
+            foreach(['title', 'excerpt'] as $translatable){
+                $trans_ids[] = $rpost->{$translatable};
+            }
+        }
+
+        $translations_temp = Translation::select(['trans_id', 'value'])->whereIn('trans_id', $trans_ids)->where('lang', app()->getLocale())->get()->toArray();
+        $translations = array_combine(array_column($translations_temp, 'trans_id'), array_column($translations_temp, 'value'));
+        
+        return view('front.blogpost', compact(['blogpost','related_posts', 'translations']));
     }
 
     public function contact_us(){

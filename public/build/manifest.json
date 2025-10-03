@@ -34,7 +34,7 @@
     "css": [
       "assets/app-d66ac298.css"
     ],
-    "file": "assets/app-013fb83c.js",
+    "file": "assets/app-bac42df8.js",
     "imports": [
       "_module.esm-0c44cdfb.js"
     ],
@@ -47,7 +47,7 @@
     "src": "resources/scss/admin.scss"
   },
   "resources/scss/app.scss": {
-    "file": "assets/app-3e083644.css",
+    "file": "assets/app-5c6e3fad.css",
     "isEntry": true,
     "src": "resources/scss/app.scss"
   }

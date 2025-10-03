@@ -8,7 +8,7 @@
     <div class="px-3 d-flex flex-column">
         <div class="d-flex align-items-center">
             <x-inno::langswitch></x-inno::langswitch>
-            <a href="{{ route('home') }}" class="ms-3 px-3 py-0 btn btn-outline-warning" target="_blank">
+            <a href="{{ loc_route('home') }}" class="ms-3 px-3 py-0 btn btn-outline-warning" target="_blank">
                 <i class="bi bi-eye-fill"></i>
                 {{-- {{ __('Preview site') }} --}}
             </a>

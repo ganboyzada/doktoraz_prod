@@ -6,12 +6,12 @@
 
 @section('main')
 
-<div class="md:h-[85vh]">
-    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-12 grid-rows-1 gap-3 md:gap-5 md:h-full">
+<div class="md:h-[80vh]">
+    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-12 grid-rows-1 gap-3 md:gap-4 md:h-full">
         <div class="xl:col-span-4 grid md:grid-rows-4 xl:grid-rows-12 gap-2 md:gap-3">
-            <div class="tile service-intro flex-col items-start p-6 md:row-span-1 xl:row-span-4 min-h-48" style="--service-color: #1A6CE7;">
+            <div class="tile service-intro flex-col items-start p-6 md:row-span-1 xl:row-span-4 min-h-42" style="--service-color: #1A6CE7;">
                 <img src="{{ asset('front/img/bg_about.png') }}" alt="" class="tile-bg">
-                <a href="{{ route('home') }}" class="btn btn-adaptive">
+                <a href="{{ loc_route('home') }}" class="btn btn-adaptive">
                     <i data-feather="chevron-left"></i>
                     {{ s_trans('Ana səhifə') }}
                 </a>

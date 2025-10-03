@@ -15,7 +15,7 @@
         @include('front.includes.breadcrumb', ['title'=>s_trans('Xidmətlər')])
     @endisset --}}
 
-<div class="md:h-[85vh] flex gap-2 sm:gap-3 departments">
+<div class="md:h-[80vh] flex gap-2 sm:gap-3 departments">
     @foreach ($departments as $k=>$dep)
     <div class="department" data-id='{{ $k+1 }}' style="--dep-color: {{ $dep->color }};">
         <div class="dep-title flex items-center mb-4">
@@ -29,7 +29,7 @@
         
         <div class="service-tiles grid md:grid-cols-2 lg:grid-cols-4 auto-rows-[100px] gap-2 sm:gap-3 md:h-[90%]">
             @foreach ($dep->categories as $service)
-            <a href="{{ route('services.find', $service->slug) }}" class="tile tile-service">
+            <a href="{{ loc_route('services.find', $service->slug) }}" class="tile tile-service">
                 @if($service->icon)
                 <img src="{{ media($service->icon) }}" class="service-icon" alt="serv_id_{{ $service->id }}_icon">
                 @endif

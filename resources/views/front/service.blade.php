@@ -4,7 +4,7 @@
 
 @section('main')
 
-<div class="md:h-[85vh]">
+<div class="md:h-[80vh]">
     <div class="grid lg:grid-cols-12 lg:grid-rows-1 gap-3 h-full">
         <div class="col-span-12 md:col-span-6 lg:col-span-6 xl:col-span-4 2xl:col-span-4 grid grid-cols-1 lg:grid-rows-12 gap-2 sm:gap-3">
             <div class="tile service-intro flex-col items-start p-6 row-span-5 2xl:row-span-6" style="--service-color: {{ $service->color ? $service->color : '#3D4871' }};">
@@ -14,7 +14,7 @@
                 @if($cover_photo)
                 <img src="{{ media($cover_photo) }}" alt="service_bg" class="tile-bg">
                 @endif
-                <a href="{{ route('services') }}" class="btn btn-adaptive">
+                <a href="{{ loc_route('services') }}" class="btn btn-adaptive">
                     <i data-feather="chevron-left"></i>
                     {{ s_trans('Bütün şöbələr') }}
                 </a>
@@ -31,7 +31,7 @@
                     </div>
                     <div class="swiper-wrapper">
                         @foreach ($service->members as $k=>$doctor)
-                        <a class="swiper-slide doctor" href="{{ route('doctors.find', $doctor->slug) }}">
+                        <a class="swiper-slide doctor" href="{{ loc_route('doctors.find', $doctor->slug) }}">
                             <div class="doc-name text-sm"><b>{{ $doctor->first_name.' '.$doctor->last_name }}</b><br>{{ $translations[$doctor->designation] }}</div>
                             <img src="{{ media($doctor->photo) }}" alt="">
                             <span class="btn btn-waterdrop btn-doc-detail"><i data-feather="info"></i></span>
@@ -92,7 +92,7 @@
             </div>
             <div class="service-tiles grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-1 2xl:grid-cols-1 gap-2 auto-rows-[60px] overflow-y-scroll pb-32 px-6">
                 @foreach ($related_services as $rel_service)
-                <a href="{{ route('services.find', $rel_service->slug) }}" class="tile tile-service related-service">
+                <a href="{{ loc_route('services.find', $rel_service->slug) }}" class="tile tile-service related-service">
                     @if($rel_service->icon)
                     <img src="{{ media($rel_service->icon) }}" class="service-icon" alt="serv_id_{{ $rel_service->id }}_icon">
                     @endif

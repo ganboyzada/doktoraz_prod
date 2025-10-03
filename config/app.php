@@ -84,6 +84,7 @@ return [
     */
 
     'locale' => 'az',
+    'available_locales' => ['az', 'ru'],
     'inno_lang' => 'az',
     'inno_modules' => [
         // 'media' => 'image',
@@ -103,7 +104,7 @@ return [
         'socials' => 'share',
         'branches' => 'share',
         // 'social_posts' => 'share',
-        // 'blogs' => 'newspaper',
+        'blogs' => 'newspaper',
         // 'faqs' => 'question-circle',
         'languages' => 'globe2',
         'translations' => 'translate',

@@ -7,17 +7,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>@yield('page_title', 'Doktor.az Klinika')</title>
+    <title>@yield('page_title', 'DOKTOR AZ KLİNİKASI – Sumqayıt | Terapiya, Ginekologiya, Kardiologiya')</title>
 
     <meta name="description" content="@yield('meta_desc', '')">
     <meta name="keywords" content="@yield('meta_tags', '')">
+    <link rel="canonical" href="https://doktoraz.az/">
+
+    <link rel="alternate" href="https://doktoraz.az/az" hreflang="az" />
+    <link rel="alternate" href="https://doktoraz.az/ru/" hreflang="ru" />
+    <link rel="alternate" href="https://doktoraz.az/az" hreflang="x-default" />
+
     <meta name="author" content="Doktor.az Klinika">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('front/apple-touch-icon.png') }}">
-	<link rel="icon" type="image/png" sizes="32x32" href="{{ asset('front/favicon-32x32.png') }}">
-	<link rel="icon" type="image/png" sizes="16x16" href="{{ asset('front/favicon-16x16.png') }}">
-	<link rel="manifest" href="{{ asset('front/site.webmanifest') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('apple-touch-icon.png') }}">
+	<link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon-32x32.png') }}">
+	<link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon-16x16.png') }}">
+	
+    <link rel="manifest" href="{{ asset('manifest.json') }}">
 
     @vite(['resources/scss/app.scss','resources/js/app.js'])
 

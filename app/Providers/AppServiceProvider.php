@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Blade;
 use App\Models\Content;
+use Illuminate\Support\Facades\URL;
 use App\Models\Language;
 use App\Models\Setting;
 use App\Models\Social;
@@ -26,8 +27,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        // $locale = session('locale');
+        // URL::defaults(['locale' => $locale]);
     
-        Paginator::defaultView('vendor.pagination.bootstrap-5');
+        Paginator::defaultView('vendor.pagination.tailwind');
         Blade::anonymousComponentNamespace('inno.components','inno');
         Blade::anonymousComponentNamespace('inno.layouts','innolayout');
         View::share('languages', Language::get()->keyBy('code'));

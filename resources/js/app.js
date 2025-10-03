@@ -8,7 +8,7 @@ import Swiper from 'swiper';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-import { Navigation, Pagination, Grid } from 'swiper/modules';
+import { Navigation, Pagination, Grid, Autoplay } from 'swiper/modules';
 
 // Replace all <i data-feather="icon-name"></i> with SVGs
 document.addEventListener("DOMContentLoaded", () => {
@@ -48,8 +48,12 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 new Swiper('#home_slider', {
-  modules: [Navigation, Pagination],
+  modules: [Navigation, Pagination, Autoplay],
   loop: true,
+  autoplay: {
+      delay: 5000, // 3 seconds
+      disableOnInteraction: false, // keep autoplay after user interactions
+    },
   navigation: {
     nextEl: '.swiper-button-next',
     prevEl: '.swiper-button-prev',

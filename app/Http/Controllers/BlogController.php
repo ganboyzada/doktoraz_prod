@@ -24,7 +24,7 @@ class BlogController extends Controller
                 'type'=>'text',
                 'parse'=>'title',
                 'delimiter'=>'-',
-                'lang'=> 'en',
+                'lang'=> 'az',
             ],
             'desc'=>[
                 'type'=>'trans',

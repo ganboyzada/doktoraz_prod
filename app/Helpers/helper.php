@@ -104,4 +104,9 @@ if (!function_exists('media')) {
 
         return 'N/A';
     }
+
+    function loc_route($name, $params = []) {
+        $locale = session('locale', config('app.locale'));
+        return route($name.'.'.$locale, $params);
+    }
 }

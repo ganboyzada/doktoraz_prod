@@ -1,11 +1,11 @@
-<div class="md:hidden mobile-menu opened" :class="{ 'opened': open }" x-data="{ open: false }">
+<div class="lg:hidden mobile-menu opened" :class="{ 'opened': open }" x-data="{ open: false }">
     <button id="mob-menu-toggle" class="btn btn-toggle" @click="open = !open">
         <i data-feather="menu" stroke-width=2></i>
         <i data-feather="x" stroke-width=2></i>
     </button>
     <div class="mob-menu-frame flex flex-col">
         <div class="flex gap-2">
-            <a class="btn px-3 bg-trans shadow-lg" href="{{ route('home') }}">
+            <a class="btn px-3 bg-trans shadow-lg" href="{{ loc_route('home') }}">
                 <i data-feather="home"></i>
             </a>
             <div class="lang-switch relative z-[5]" x-data="{ open: false }">
@@ -40,13 +40,13 @@
                         'icon' => 'info',   
                     ],
                     'xeberler-basliq' => [
-                        'route'=>null,
+                        'route'=>'news',
                         'icon'=>'radio',   
                     ]
                 ];
             @endphp
             @foreach ($links as $title=>$detail)
-            <a href="{{ $detail['route'] ? route($detail['route']) : '' }}" class="tile shadow-lg bg-trans py-3 px-4">
+            <a href="{{ $detail['route'] ? loc_route($detail['route']) : '' }}" class="tile shadow-lg bg-trans py-3 px-4">
                 <i class="absolute bottom-3 right-4 text-white-500 opacity-50" width=40 height=40 stroke-width=0.5 data-feather="{{ $detail['icon'] }}"></i>
                 <span class="font-semibold">{!! s_trans($title) !!}</span>
             </a>

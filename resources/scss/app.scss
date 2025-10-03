@@ -261,9 +261,11 @@ span.sep.vert{
     
     .t-heading{
       font-size: 24px;
+      line-height: 110%;
       font-weight: 300;
+      margin-bottom: 0.4rem;
       b{
-        font-weight: 600;
+        font-weight: 500;
       }
     }
 
@@ -282,7 +284,7 @@ span.sep.vert{
     background-color: #24405A;
     box-shadow: inset -16px -17px 19px -3px #2F5C86,
                 inset 19px 19px 21px -11px #0E2E4C,
-                10px 14px 15px -6px rgba(#2F5C86, 0.5);
+                0px 10px 15px -1px rgba(#2F5C86, 0.5);
 
     .tile-title{
       color: #fff;
@@ -308,7 +310,7 @@ span.sep.vert{
     background-color: $brand;
     box-shadow: inset -16px -17px 22px -5px #579AFF,
                 inset 18px 17px 16px -11px #0E53BB,
-                10px 14px 15px -6px rgba($brand, 0.25);
+                0px 10px 15px 2px rgba($brand, 0.25);
     
     .tile-title{
       color: #fff;
@@ -349,7 +351,7 @@ span.sep.vert{
       padding: 0 0.8rem;
       font-size: 1.2rem;
       @include lg{
-        font-size: 1rem;
+        font-size: 1.2rem;
         padding: 0 0.8rem;
       }
       font-weight: 600;
@@ -367,7 +369,7 @@ span.sep.vert{
         height: 60px;
       }
       .tile-title{
-        font-weight: 400;
+        font-weight: 600;
         font-size: 1rem;
       }
      
@@ -592,14 +594,16 @@ span.sep.vert{
 
   .slide-overlay{
     position: absolute;
-    padding: 1.6rem;
+    padding: 4rem 1.6rem;
+    padding-top: 8rem;
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 40%;
-    border-radius: 20px;
-    backdrop-filter: blur(20px) saturate(1);
-    background-color: rgba(#24405A, 0.3);
+    height: 60%;
+    // border-radius: 20px;
+    // backdrop-filter: blur(20px) saturate(1);
+    // background-color: rgba(#24405A, 0.3);
+    background: linear-gradient(0deg, #24405a, transparent);
     opacity: 0;
     transition: 1.5s ease opacity;
 
@@ -607,8 +611,11 @@ span.sep.vert{
       display: flex;
       align-items: center;
       color: rgba(#fff, 0.6);
-      font-weight: 300;
-      font-size: 1rem;
+      font-weight: 400;
+      font-size: 0.9rem;
+      @include md{
+        font-size: 1rem;
+      }
       img{
         width: 20px;
         margin-right: 0.8rem;
@@ -616,7 +623,7 @@ span.sep.vert{
     }
 
     .slide-caption{
-      font-weight: 600;
+      font-weight: 400;
       margin-top: 0.6rem;
       font-size: 1.4rem;
       @include md{
@@ -624,11 +631,11 @@ span.sep.vert{
       }
       @include lg{
         margin-top: 1.4rem;
-        line-height: 140%;
+        line-height: 130%;
       }
       @include xl{
         font-size: 28px;
-        margin-top: 1.6rem;
+        margin-top: 1.2rem;
       }
       
       color: #fff;
@@ -651,10 +658,10 @@ span.sep.vert{
 .swiper-pagination-bullets.swiper-pagination-horizontal{
   width: auto !important;
   left: 1.6rem !important;
-  bottom: 1.4rem !important;
+  top: 1rem !important;
   .swiper-pagination-bullet{
     border-radius: 9999px;
-    height: 6px;
+    height: 3px;
     width: 21px;
     background-color: rgba(#fff, 0.40);
     margin: 0 !important;
@@ -662,7 +669,7 @@ span.sep.vert{
     transition: 0.4s ease width, 1s ease background-color;
   }
   .swiper-pagination-bullet-active{
-    background-color: rgba(#fff, 0.75);
+    background-color: rgba(#fff, 0.6);
     width: 30px;
   }
 }
@@ -761,8 +768,15 @@ span.sep.vert{
   to { transform: translateX(5px) rotateZ(45deg) translateY(7px); }
 }
 
-.tile.colored-tile{
-  box-shadow: inset 10px 10px 10px -2px rgba(#fff, 0.3);
+.tile.colored-tile:before{
+  content: '';
+  position: absolute;
+  right: 0;
+  width: 60%;
+  top: 0;
+  height: 100%;
+  z-index: 1;
+  background: linear-gradient(-90deg,  transparent 10%, #fff 80%);
 }
 
 //MOBILE MENU
@@ -791,23 +805,31 @@ span.sep.vert{
   top: 1.2rem;
   right: 1.75rem;
   height: 40px;
-  width: 62px;
+  width: 60px;
+  @include md{
+    top: 1.7rem;
+    right: 1.4rem;
+    width: 80px;
+  }
   border-radius: 100px;
   background-color: rgba(#fff, 0.5) !important;
   backdrop-filter: blur(16px) saturate(1.5);
-  -webkit-backdrop-filter: blur(16px) saturate(2);
+  -webkit-backdrop-filter: blur(16px) saturate(1.5);
   box-shadow: inset -4px -4px 6px 0px rgba(#fff, 0.3),
           inset 4px 4px 3px -2px rgba(#000, 0.2),
           2px 2px 8px 0 rgba(#000, 0.2);
 
   .btn-toggle{
-    padding: 0 1.2rem; 
+    padding: 0 1.1rem; 
     position: absolute;
     border-radius: 9999px;
     border: 2px solid transparent;
     right: 0;
     top: 0;
     z-index: 2;
+    @include md{
+      padding: 0 1.6rem; 
+    }
 
     svg:last-child{
       display: none;
@@ -827,8 +849,14 @@ span.sep.vert{
   }
 
   &.opened{
-    height: calc(100vh - 3rem);
-    width: calc(100% - 0.5rem);
+    @include xs{
+      height: calc(100vh - 3rem);
+      width: calc(100% - 0.5rem);
+    }
+
+    height: 600px;
+    width: 500px;
+    
     right: 0.25rem;
     top: 0.25rem;
     border-radius: 30px;
@@ -848,7 +876,10 @@ span.sep.vert{
     }
 
     .mob-menu-frame{
-      max-height: 100vh;
+      max-height: 600px;
+      @include xs{
+        max-height: 100vh;
+      }
       padding: 1.6rem;
       opacity: 1;
     }

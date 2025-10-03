@@ -1,5 +1,5 @@
-<header class="relative z-[10] mb-4 md:mb-6 flex items-center gap-3 px-5 lg:px-0">
-    <a href="{{ route('home') }}" class="nav-logo flex items-center h-8 md:h-10 mr-auto">
+<header class="relative z-[10] mb-4 md:mb-6 flex items-center gap-3 px-5 md:px-0">
+    <a href="{{ loc_route('home') }}" class="nav-logo flex items-center h-8 md:h-10 mr-auto">
         <img class="h-full" src="{{ asset('front/img/logo_c_light.svg') }}" alt="">
         <span class="hidden sm:inline sep vert"></span>
         <span class="hidden sm:inline">
@@ -7,7 +7,7 @@
             biləcəyiniz klinika
         </span>
     </a>
-    <div class="relative inline-block lang-switch hidden md:inline" x-data="{ open: false }">
+    <div class="relative inline-block lang-switch hidden lg:inline" x-data="{ open: false }">
         <button class="btn btn-waterdrop uppercase" @click="open = !open">
             <i data-feather="globe"></i>{{ app()->getLocale() }}
         </button>
@@ -20,7 +20,7 @@
             @endforeach
         </div>
     </div>
-    <div class="action-button hidden md:inline">
+    <div class="action-button hidden lg:inline">
         <a href="" class="btn btn-primary font-light">
             <i data-feather="file-text"></i>E-Nəticə
         </a>

@@ -38,14 +38,26 @@ use Illuminate\Support\Facades\Route;
 Route::get('/lang/{code}', [FrontController::class, 'switchLang'])->name('langswitch');
 Route::get('/sitemap', [FrontController::class, 'sitemap'])->name('sitemap');
 
-Route::group(['middleware' => ['lang']], function () {
-    Route::get('/', [FrontController::class, 'home'])->name('home');
-    Route::get('/xidmetler', [FrontController::class, 'services'])->name('services');
-    Route::get('/xidmetler/{slug}', [FrontController::class, 'service'])->name('services.find');
-    Route::get('/hekimler', [FrontController::class, 'doctors'])->name('doctors');
-    Route::get('/hekimler/{slug}', [FrontController::class, 'doctor'])->name('doctors.find');
-    Route::get('/haqqimizda', [FrontController::class, 'about_us'])->name('about_us');
+// $languages = config('app.available_locales');
+$languages = ['az','ru'];
+
+Route::get('/', function () {
+    $default = config('app.locale'); // fallback to az
+    return redirect()->to($default);
 });
+
+foreach ($languages as $lang) {
+    Route::group(['prefix' => $lang, 'middleware'=>'lang'], function () use ($lang) {
+        Route::get('/', [FrontController::class, 'home'])->name('home.'.$lang);
+        Route::get('/xidmetler', [FrontController::class, 'services'])->name('services.'.$lang);
+        Route::get('/xidmetler/{slug}', [FrontController::class, 'service'])->name('services.find.'.$lang);
+        Route::get('/hekimler', [FrontController::class, 'doctors'])->name('doctors.'.$lang);
+        Route::get('/hekimler/{slug}', [FrontController::class, 'doctor'])->name('doctors.find.'.$lang);
+        Route::get('/xeberler', [FrontController::class, 'blog'])->name('news.'.$lang);
+        Route::get('/xeberler/{slug}', [FrontController::class, 'blogpost'])->name('news.find.'.$lang);
+        Route::get('/haqqimizda', [FrontController::class, 'about_us'])->name('about_us.'.$lang);
+    });
+}
 
 // Admin Panel
 

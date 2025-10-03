@@ -15,17 +15,15 @@ class LanguageMiddleware
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
     public function handle(Request $request, Closure $next): Response
-    {
-        if(!session()->has('locale')){
-            session()->put('locale', config('app.locale'));
-        }
+    {        
+        $locale = session('locale', config('app.locale'));
 
-        if(session()->has('order_date') && session()->has('failed_order')){
-            session()->forget('order_date');
-        }
-
-        app()->setLocale(session('locale'));
+        app()->setLocale($locale);   
         
+        // $request->route()->setAction(array_merge(
+        //     $request->route()->getAction(),
+        //     ['prefix' => $locale]
+        // ));
 
         return $next($request);
     }
