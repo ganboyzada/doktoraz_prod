@@ -18,6 +18,7 @@ use Spatie\Sitemap\SitemapGenerator;
 use App\Models\Setting;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Cache;
 
 
 class FrontController extends Controller
@@ -79,83 +80,35 @@ class FrontController extends Controller
     }
 
     public function home(){
-
-        $page_meta = PageMeta::where('title', 'home')->first();
-        $trans_ids = [];
-        $trans_ids[]=$page_meta->meta_tags;
-        $trans_ids[]=$page_meta->meta_desc;
-
+        $page_meta = Cache::remember("page_meta.home", now()->addHours(6), function () {
+            return PageMeta::where('title', 'home')->first();
+        });
         $slides = Slide::where('featured', true)->get();
-
-        foreach($slides as $slide){
-            foreach(['title'] as $translatable){
-                $trans_ids[] = $slide->{$translatable};
-            }
-        }
-
-        // $questions = Faq::where('published', true)->take(4)->get();
-        // foreach($questions as $question){
-        //     foreach(['question', 'answer'] as $translatable){
-        //         $trans_ids[] = $question->{$translatable};
-        //     }
-        // }
         
-        $translations_temp = Translation::select(['trans_id', 'value'])->whereIn('trans_id', $trans_ids)->where('lang', app()->getLocale())->get()->toArray();
-        $translations = array_combine(array_column($translations_temp, 'trans_id'), array_column($translations_temp, 'value'));
-        
-        return view('front.home', compact(['slides','translations', 'page_meta']));
+        return view('front.home', compact(['slides', 'page_meta']));
         
     }
 
     public function services(){
-        $trans_ids = [];
-
+        $page_meta = Cache::remember("page_meta.xidmetler", now()->addHours(6), function () {
+            return PageMeta::where('title', 'xidmetler')->first();
+        });
         $departments = Department::with('categories')->get();
-
-        foreach($departments as $dep){
-            foreach(['name', 'meta_tags'] as $translatable){
-                $trans_ids[] = $dep->{$translatable};
-            }
-            foreach($dep->categories as $service){
-                $trans_ids[] = $service->name;
-            }
-        }
-
-        $translations_temp = Translation::select(['trans_id', 'value'])->whereIn('trans_id', $trans_ids)->where('lang', app()->getLocale())->get()->toArray();
-        $translations = array_combine(array_column($translations_temp, 'trans_id'), array_column($translations_temp, 'value'));
-
-        return view('front.services', compact(['translations','departments']));
+        return view('front.services', compact(['departments', 'page_meta']));
     }
 
     public function service($slug){
-        $trans_ids = [];
         $service = Category::where('slug', $slug)->first();
         $related_services = Category::where('parent_id', $service->parent_id)->get();
 
-        foreach(['name', 'desc'] as $translatable){
-            $trans_ids[] = $service->{$translatable};
-            $trans_ids[] = $service->department->{$translatable};
-        }
-
-        foreach($service->members as $member){
-            foreach(['designation'] as $translatable){
-                $trans_ids[] = $member->{$translatable};
-            }
-        }
-        foreach($related_services as $rel_service){
-            foreach(['name'] as $translatable){
-                $trans_ids[] = $rel_service->{$translatable};
-            }
-        }
-
-        $translations_temp = Translation::select(['trans_id', 'value'])->whereIn('trans_id', $trans_ids)->where('lang', app()->getLocale())->get()->toArray();
-        $translations = array_combine(array_column($translations_temp, 'trans_id'), array_column($translations_temp, 'value'));
-
-        return view('front.service', compact(['translations','service', 'related_services']));
+        return view('front.service', compact(['service', 'related_services']));
     }
 
     public function doctors(){
-        $trans_ids = [];
+        $page_meta = Cache::remember("page_meta.hekimler", now()->addHours(6), function () {
+            return PageMeta::where('title', 'hekimler')->first();
+        });
+
         $active_service = request('service'); 
         $services = Category::get();
         $featured_doctors = Member::where('classified', true)->get();
@@ -168,121 +121,46 @@ class FrontController extends Controller
 
         $doctors = $doctors_query->get();
 
-        foreach(['designation'] as $translatable){
-            foreach($doctors as $doctor){
-                $trans_ids[] = $doctor->{$translatable};
-            }
-            foreach($featured_doctors as $fdoctor){
-                $trans_ids[] = $fdoctor->{$translatable};
-            }
-        }
-        foreach($services as $service){
-            foreach(['name'] as $translatable){
-                $trans_ids[] = $service->{$translatable};
-            }
-        }
-
-        $translations_temp = Translation::select(['trans_id', 'value'])->whereIn('trans_id', $trans_ids)->where('lang', app()->getLocale())->get()->toArray();
-        $translations = array_combine(array_column($translations_temp, 'trans_id'), array_column($translations_temp, 'value'));
-
-        return view('front.doctors', compact(['translations','doctors', 'featured_doctors', 'services', 'active_service']));
+        return view('front.doctors', compact(['doctors', 'featured_doctors', 'services', 'active_service', 'page_meta']));
     }
 
     public function doctor($slug){
-        $trans_ids = [];
         $doctor = Member::where('slug', $slug)->first();
 
-        foreach(['designation', 'desc'] as $translatable){
-            $trans_ids[] = $doctor->{$translatable};
-        }
-
-        foreach(['name'] as $translatable){
-            $trans_ids[] = $doctor->category->{$translatable};
-        }
-
-        $translations_temp = Translation::select(['trans_id', 'value'])->whereIn('trans_id', $trans_ids)->where('lang', app()->getLocale())->get()->toArray();
-        $translations = array_combine(array_column($translations_temp, 'trans_id'), array_column($translations_temp, 'value'));
-
-        return view('front.doctor', compact(['translations','doctor']));
+        return view('front.doctor', compact(['doctor']));
     }
 
     public function about_us(){
-        $page_meta = PageMeta::where('title', 'about-us')->first();
-        $trans_ids = [];
-        // $trans_ids[]=$page_meta->meta_tags;
-        // $trans_ids[]=$page_meta->meta_desc;
-        // $content = Content::where('type', 'section')->where('name','about_us')->first();
-        // $trans_ids[]=$content->value;
-
-        // $translations_temp = Translation::select(['trans_id', 'value'])->whereIn('trans_id', $trans_ids)->where('lang', app()->getLocale())->get()->toArray();
-        // $translations = array_combine(array_column($translations_temp, 'trans_id'), array_column($translations_temp, 'value'));
         
-        // return view('front.about_us', compact(['content', 'translations', 'page_meta']));
-        return view('front.about_us');
+        $page_meta = Cache::remember("page_meta.haqqimizda", now()->addHours(6), function () {
+            return PageMeta::where('title', 'haqqimizda')->first();
+        });
+        
+        return view('front.about_us', compact(['page_meta']));
     }
 
     public function blog($deparment = null){
-        $page_meta = PageMeta::where('title', 'xeberler')->first();
-        $trans_ids = [];
-        $trans_ids[]=$page_meta->meta_tags;
-        $trans_ids[]=$page_meta->meta_desc;
-
+        $page_meta = Cache::remember("page_meta.xeberler", now()->addHours(6), function () {
+            return PageMeta::where('title', 'xeberler')->first();
+        });
+        
         $blogposts = Blog::paginate(12);
-        foreach($blogposts as $blogpost){
-            foreach(['title', 'excerpt'] as $translatable){
-                $trans_ids[] = $blogpost->{$translatable};
-            }
-        }
-        
-        $translations_temp = Translation::select(['trans_id', 'value'])->whereIn('trans_id', $trans_ids)->where('lang', app()->getLocale())->get()->toArray();
-        $translations = array_combine(array_column($translations_temp, 'trans_id'), array_column($translations_temp, 'value'));
-        
-        
-        return view('front.blog', compact(['blogposts', 'translations', 'page_meta']));
+
+        return view('front.blog', compact(['blogposts', 'page_meta']));
     }
 
     public function blogpost($slug){
         $blogpost = Blog::where('slug', $slug)->firstOrFail();
         $related_posts = Blog::where('slug', '!=', $slug)->orderBy('created_at', 'desc')->get();
-        $trans_ids = [];
-
-        foreach(['title', 'excerpt', 'meta_tags', 'meta_desc', 'desc'] as $translatable){
-            $trans_ids[] = $blogpost->{$translatable};
-        }
-
-        foreach($related_posts as $rpost){
-            foreach(['title', 'excerpt'] as $translatable){
-                $trans_ids[] = $rpost->{$translatable};
-            }
-        }
-
-        $translations_temp = Translation::select(['trans_id', 'value'])->whereIn('trans_id', $trans_ids)->where('lang', app()->getLocale())->get()->toArray();
-        $translations = array_combine(array_column($translations_temp, 'trans_id'), array_column($translations_temp, 'value'));
         
-        return view('front.blogpost', compact(['blogpost','related_posts', 'translations']));
+        return view('front.blogpost', compact(['blogpost','related_posts']));
     }
 
     public function contact_us(){
         $page_meta = PageMeta::where('title', 'contact-us')->first();
-        $trans_ids = [];
-        $trans_ids[]=$page_meta->meta_tags;
-        $trans_ids[]=$page_meta->meta_desc;
         
         $branches = Branch::get();
-        foreach($branches as $branch){
-            foreach(['name', 'address'] as $translatable){
-                $trans_ids[] = $branch->{$translatable};
-            }
-        }
         
-        $translations_temp = Translation::select(['trans_id', 'value'])->whereIn('trans_id', $trans_ids)->where('lang', app()->getLocale())->get()->toArray();
-        $translations = array_combine(array_column($translations_temp, 'trans_id'), array_column($translations_temp, 'value'));
-        
-        return view('front.contact_us', compact(['branches', 'translations', 'page_meta']));
+        return view('front.contact_us', compact(['branches', 'page_meta']));
     }
-
-    // public function gallery($type){
-    //     $gallery_posts = GalleryPost::where('type', $type)->get();
-    //     return view('front.gallery', compact(['type','gallery_posts']));
-    // }
 }

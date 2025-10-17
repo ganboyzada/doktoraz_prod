@@ -1,16 +1,17 @@
 @extends('front.layouts.master')
 
-@section('page_title', 'Dr '.$doctor->first_name.' '.$doctor->last_name[0].' - Doktor.az Klinika')
+@section('page_title', 'Dr '.$doctor->first_name.' '.$doctor->last_name.' - Doktor.az Klinika')
+@section('meta_desc', translate($doctor->desc))
 
 @section('main')
 
 <div class="md:h-[85vh] lg:h-[80vh]">
     <div class="grid lg:grid-cols-12 lg:grid-rows-1 gap-3 md:h-full">
 
-        <div class="lg:col-span-5 lg:row-span-1">
+        <div class="lg:col-span-6 lg:row-span-1">
             
             <div class="tile flex flex-col gap-4 p-6 h-full">
-                <div class="flex flex-wrap gap-3">
+                <div class="flex flex-wrap gap-3 mb-3">
                     <a href="{{ loc_route('home') }}" class="px-3 pr-4 btn btn-waterdrop">
                         <i data-feather="home"></i>
                         {{ s_trans('Ana səhifə') }}
@@ -23,15 +24,15 @@
                 </div>
                 
                 <div class="flex flex-col items-start gap-4">
-                    <div class="w-full grid md:grid-cols-2 gap-3">
-                        <div class="radius-x bg-slate-100 relative flex lg:pt-6">
+                    <div class="w-full grid md:grid-cols-2 lg:grid-cols-12 gap-3">
+                        <div class="lg:col-span-5 radius-x bg-slate-100 relative flex lg:pt-6">
                             <div class="px-5 pt-16 pb-5 text-white absolute left-0 right-0 bottom-0 radius-s text-xl text-center uppercase font-semibold" 
                                 style="background: linear-gradient(0deg, #3D4871 -30%, transparent);">
-                                {{ $translations[$doctor->designation] }}
+                                {{ translate($doctor->designation) }}
                             </div>
                             <img src="{{ media($doctor->photo) }}" class="mx-auto max-w-full w-[95%] h-full md:max-h-[25vh] xl:max-h-[50vh] object-contain object-bottom" alt="{{ $doctor->slug.'_img' }}">
                         </div>
-                        <div class="radius-x p-4 border border-slate-200">
+                        <div class="lg:col-span-7 radius-x p-4 border border-slate-200">
                             <h2 class="text-xl font-semibold">{{ s_trans('Həkim haqqında') }}</h2>
                         </div>
                     </div>
@@ -50,7 +51,7 @@
                     <img class="h-16 md:h-20" src="{{ media($doctor->category->icon) }}" alt="">
                     @endif
                     <div class="pr-3 md:p-4 flex flex-wrap items-center w-full gap-3 z-[2]">
-                        <div class="text-xl md:text-2xl mr-auto font-semibold">{{ $translations[$doctor->category->name] }}</div>
+                        <div class="text-xl md:text-2xl mr-auto font-semibold">{{ translate($doctor->category->name) }}</div>
                         <a class="radius-s btn btn-adaptive px-5 py-1" 
                             href="{{ loc_route('services.find', $doctor->category->slug) }}">{{ s_trans('Daha ətraflı') }}</a>
                     </div>
@@ -59,7 +60,7 @@
             
         </div>
        
-        <div class="lg:col-span-7 lg:row-span-1 tile p-6 has-read-more flex-col min-h-96">
+        <div class="lg:col-span-6 lg:row-span-1 tile p-6 has-read-more flex-col min-h-96">
             <div class="flex items-center mb-3">
                 <i width="30" height="30" class="mr-3" data-feather="award" ></i>
                 <h2 class="text-xl font-semibold">{{ s_trans('Təhsil və Təcrübələr') }}</h2>
@@ -68,7 +69,11 @@
             <div class="overflow-y-scroll h-full min-h-96">
                 <div class="h-[100px] leading-7">
                     <div class="pb-[150px]">
-                        {!! $translations[$doctor->desc] !!}
+                        @if(translate($doctor->desc))
+                        {!! translate($doctor->desc) !!}
+                        @else
+                        @include('front.layouts.notfound')
+                        @endif
                     </div>
                 </div>
             </div>

@@ -2,6 +2,7 @@
 @tailwind components;
 
 @import "@fontsource-variable/plus-jakarta-sans";
+@import '@fontsource-variable/manrope';
 
 // Small tablets and large smartphones (landscape view)
 $screen-sm-min: 640px;
@@ -62,10 +63,11 @@ $radius_x: 20px;
 
 // Your custom styles below
 body {
-  font-family: "Plus Jakarta Sans Variable", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-family: "Manrope Variable", "Plus Jakarta Sans Variable", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   background-color: $master-bg;
   color: $body;
   letter-spacing: 0.01rem;
+  color-scheme: only light;
 }
 
 div{
@@ -229,8 +231,8 @@ span.sep.vert{
     &.ambulance-bg{
       height: 80%;
       width: auto;
-      right: -24%;
-      bottom: 0.6rem;
+      right: -10%;
+      bottom: 0rem;
       filter: brightness(1.2);
     }
   }
@@ -262,7 +264,7 @@ span.sep.vert{
     .t-heading{
       font-size: 24px;
       line-height: 110%;
-      font-weight: 300;
+      font-weight: 500;
       margin-bottom: 0.4rem;
       b{
         font-weight: 500;
@@ -273,7 +275,11 @@ span.sep.vert{
       margin-top: 0.2rem;
       opacity: 0.6;
       font-weight: 400;
-      font-size: 0.9rem;
+      font-size: 0.8rem;
+      line-height: 150%;
+      @include lg{
+        font-size: 0.9rem;
+      }
       @include xxl{
         font-size: 1rem;
       }
@@ -281,10 +287,9 @@ span.sep.vert{
   }
 
   &.services{
-    background-color: #24405A;
-    box-shadow: inset -16px -17px 19px -3px #2F5C86,
-                inset 19px 19px 21px -11px #0E2E4C,
-                0px 10px 15px -1px rgba(#2F5C86, 0.5);
+    $services-col: #1a4b93; 
+    background-color: $services-col;
+    box-shadow: 0px 20px 30px -15px rgba($services-col, 0.6);
 
     .tile-title{
       color: #fff;
@@ -299,18 +304,32 @@ span.sep.vert{
       position: absolute;
       bottom: 0;
       right: 0;
-      width: 80%;
-      height: 90%;
-      object-fit: contain;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
       object-position: right;
+      filter: saturate(0.4) brightness(0.75) contrast(4);
+      -webkit-filter: saturate(0.4) brightness(0.75) contrast(4);
     }
+
+    &:after{
+        content: '';
+        position: absolute;
+        right: 0;
+        display: block;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(-45deg, rgba($services-col, 0.2), rgba($services-col, 0.9) 50%);
+        z-index: 1;
+      }
   }
 
   &.doctors{
     background-color: $brand;
     box-shadow: inset -16px -17px 22px -5px #579AFF,
-                inset 18px 17px 16px -11px #0E53BB,
-                0px 10px 15px 2px rgba($brand, 0.25);
+                // inset 18px 17px 16px -11px #0E53BB,
+                 0px 20px 30px -15px rgba($brand, 0.6);
     
     .tile-title{
       color: #fff;
@@ -325,14 +344,29 @@ span.sep.vert{
       position: absolute;
       bottom: 0;
       right: 25%;
-      height: 90%;
+      height: 85%;
       z-index: 2;
 
-      &:last-child{
+      &+.fg-doc{
         right: 5%;
-        height: 80%;
+        height: 75%;
         z-index: 1;
+        opacity: 1;
       }
+    }
+  }
+
+  &.ambulance{
+
+    &:before{
+      content: '';
+      position: absolute;
+      bottom: -25%;
+      right: -25%;
+      height: 150%;
+      aspect-ratio: 1;
+      border-radius: 100%;
+      background: radial-gradient(rgba($body, 0.5), transparent 80%);
     }
   }
 
@@ -463,7 +497,7 @@ span.sep.vert{
     
     h2{
       font-size: 1.6rem;
-      font-weight: 600;
+      font-weight: 500;
       line-height: 130%;
       z-index: 4;
       color: #fff;
@@ -522,8 +556,8 @@ span.sep.vert{
       top: 0;
       left: 0;
       width: 100%;
-      height: 60%;
-      background: linear-gradient(0deg, transparent, rgba($body, 0.8));
+      height: 50%;
+      background: linear-gradient(0deg, transparent, rgba($body, 1));
       transition: 0.6s ease;
     }
 
@@ -594,27 +628,43 @@ span.sep.vert{
 
   .slide-overlay{
     position: absolute;
-    padding: 4rem 1.6rem;
-    padding-top: 8rem;
+    padding: 6rem 1.6rem 6rem 1.6rem;
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 60%;
-    // border-radius: 20px;
-    // backdrop-filter: blur(20px) saturate(1);
-    // background-color: rgba(#24405A, 0.3);
-    background: linear-gradient(0deg, #24405a, transparent);
+    
     opacity: 0;
     transition: 1.5s ease opacity;
+
+    &:before{
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 20rem;
+      background: linear-gradient(0deg, #24405a, transparent);
+    }
+
+    @include md{
+      padding: 6rem 1.6rem 6rem 1.6rem;
+      
+    }
+    @include lg{
+      padding: 12rem 1.6rem 4rem 1.6rem;
+    }
+    @include xl{
+      padding: 0rem 1.6rem 6rem 1.6rem;
+    }
 
     .welcome-msg{
       display: flex;
       align-items: center;
       color: rgba(#fff, 0.6);
       font-weight: 400;
-      font-size: 0.9rem;
-      @include md{
-        font-size: 1rem;
+      font-size: 0.8rem;
+      @include lg{
+        font-size: 0.9rem;
       }
       img{
         width: 20px;
@@ -623,7 +673,7 @@ span.sep.vert{
     }
 
     .slide-caption{
-      font-weight: 400;
+      font-weight: 500;
       margin-top: 0.6rem;
       font-size: 1.4rem;
       @include md{
@@ -719,6 +769,8 @@ span.sep.vert{
     border-radius: $radius_s;
     padding: 1rem 1rem 0 1rem;
     position: relative;
+    display: flex !important;
+    flex-direction: column;
 
     .btn-doc-detail{
       position: absolute;
@@ -729,10 +781,11 @@ span.sep.vert{
     }
    
     img{
+      margin-top: auto;
       height: 160px;
       width: 100%;
       object-fit: contain;
-      object-position: right;
+      object-position: bottom right;
     }
   }
 
@@ -813,8 +866,8 @@ span.sep.vert{
   }
   border-radius: 100px;
   background-color: rgba(#fff, 0.5) !important;
-  backdrop-filter: blur(16px) saturate(1.5);
-  -webkit-backdrop-filter: blur(16px) saturate(1.5);
+  backdrop-filter: blur(16px) saturate(1);
+  -webkit-backdrop-filter: blur(16px) saturate(1);
   box-shadow: inset -4px -4px 6px 0px rgba(#fff, 0.3),
           inset 4px 4px 3px -2px rgba(#000, 0.2),
           2px 2px 8px 0 rgba(#000, 0.2);
@@ -849,23 +902,32 @@ span.sep.vert{
   }
 
   &.opened{
-    @include xs{
-      height: calc(100vh - 3rem);
-      width: calc(100% - 0.5rem);
-    }
+    box-shadow: unset;
 
+    .bg-trans{
+      background-color: rgba(#fff, 0.1) !important;
+      color: #fff;
+    }
+  
+    color: #fff;
     height: 600px;
     width: 500px;
-    
     right: 0.25rem;
     top: 0.25rem;
+    @include xs{
+      height: calc(100vh - 3rem);
+      width: calc(100%);
+      right: 0;
+    }
+
     border-radius: 30px;
-    background-color: rgba(#f1f1f1, 0.5) !important;
+    background-color: rgba($body, 0.75) !important;
       
     .btn-toggle{
       top: 1.6rem;
       right: 1.6rem;
-      border-color: rgba($body, 0.1);
+      border-color: rgba(#fff, 0.2);
+      color: #fff;
       
       svg:first-child{
         display: none;

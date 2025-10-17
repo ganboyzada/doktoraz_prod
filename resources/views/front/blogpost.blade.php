@@ -1,8 +1,8 @@
 @extends('front.layouts.master')
 
-@section('page_title', $translations[$blogpost->title].' - Doktor.az Klinikası')
-@section('meta_tags', $translations[$blogpost->meta_tags])
-@section('meta_desc', $translations[$blogpost->meta_desc])
+@section('page_title', translate($blogpost->title).' - Doktor.az Klinikası')
+@section('meta_tags', translate($blogpost->meta_tags))
+@section('meta_desc', translate($blogpost->meta_desc))
 
 @section('main')
 <div class="md:h-[80vh]">
@@ -21,8 +21,8 @@
                     {{ \Carbon\Carbon::parse($blogpost->created_at)->format('d.m.Y') }} 
                 </div>
                 <div class="mt-auto">
-                    <h1 class="md:mt-0 text-2xl lg:text-2xl xl:text-3xl font-semibold">{{ $translations[$blogpost->title] }}</h1>
-                    <div class="my-2 lg:mt-3 opacity-75">{!! $translations[$blogpost->excerpt] !!}</div>
+                    <h1 class="md:mt-0 text-2xl lg:text-2xl xl:text-3xl font-semibold">{{ translate($blogpost->title) }}</h1>
+                    <div class="my-2 lg:mt-3 opacity-75">{!! translate($blogpost->excerpt) !!}</div>
                     
                 </div>
             </div>
@@ -38,7 +38,7 @@
                 <div class="overflow-y-scroll h-full min-h-96">
                     <div class="h-[100px] leading-7">
                         <div class="pb-[150px]">
-                            {!! $translations[$blogpost->desc] !!}
+                            {!! translate($blogpost->desc) !!}
                         </div>
                     </div>
                 </div>
@@ -82,7 +82,7 @@
                                     <i data-feather="calendar" height=20 width=20></i> 
                                     <span class="text-sm">{{ \Carbon\Carbon::parse($rpost->created_at)->format('d.m.Y') }} </span>
                                 </div>
-                                <h3 class="title text-lg font-semibold">{{ $translations[$rpost->title] }}</h3>
+                                <h3 class="title text-lg font-semibold">{{ translate($rpost->title) }}</h3>
                                     
                                 <span class="my-2 px-4 btn btn-waterdrop mr-auto">{{ s_trans('Read more') }}</span>
         

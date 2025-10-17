@@ -1,0 +1,65 @@
+/* overlay */
+  #site-preloader {
+    position: fixed;
+    inset: 0;
+    background: #ffffff;
+    z-index: 99999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 350ms ease, visibility 350ms ease;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: all;
+  }
+
+  /* center box */
+  #site-preloader .preloader-inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 18px;
+    border-radius: 20px;
+    /* box-shadow: 0 10px 30px rgba(30,40,60,0.08); */
+  }
+
+  /* SVG rotation: note transform-box + transform-origin for SVG */
+  .spinner {
+    width: 80px;
+    height: 80px;
+    transform-box: fill-box;        /* important for SVG transforms */
+    transform-origin: center;
+    animation: spinner-rotate 1.4s linear infinite;
+    display: block;
+  }
+
+  .spinner-track {
+    stroke: #f2f5f8;
+  }
+
+  /* animated arc */
+  .spinner-head {
+    stroke: #1A6CE7;               /* brand color — change if needed */
+    stroke-linecap: round;
+    stroke-dasharray: 126;         /* ~2πr (r=20) */
+    stroke-dashoffset: 126;
+    animation: spinner-dash 1.4s ease-in-out infinite;
+  }
+
+  @keyframes spinner-rotate {
+    100% { transform: rotate(360deg); }
+  }
+
+  @keyframes spinner-dash {
+    /* draw and retract the visible arc */
+    0%   { stroke-dashoffset: 126; }
+    50%  { stroke-dashoffset: 36; }
+    100% { stroke-dashoffset: 126; }
+  }
+
+  /* fade out state */
+  #site-preloader.preloader-hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }

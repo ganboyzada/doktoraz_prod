@@ -14,9 +14,9 @@
                 </button>
                 <div x-show="open" @click.outside="open = false"
                      class="absolute mt-2 bg-white text-center radius-x shadow-md">
-                    @foreach ($languages as $lang)
-                        @if($lang->code != app()->getLocale())
-                        <a href="{{ route('langswitch', $lang->code) }}" class="capitalize block px-4 py-2 rounded-full">{{ $lang->title }}</a>
+                    @foreach (config('app.available_locales') as $lang)
+                        @if($lang != app()->getLocale())
+                        <a href="{{ route('langswitch', $lang) }}" class="capitalize block px-4 py-2 rounded-full">{{ $lang }}</a>
                         @endif
                     @endforeach
                 </div>
@@ -46,14 +46,19 @@
                 ];
             @endphp
             @foreach ($links as $title=>$detail)
-            <a href="{{ $detail['route'] ? loc_route($detail['route']) : '' }}" class="tile shadow-lg bg-trans py-3 px-4">
+            <a href="{{ $detail['route'] ? loc_route($detail['route']) : '' }}" class="tile bg-trans py-3 px-4">
                 <i class="absolute bottom-3 right-4 text-white-500 opacity-50" width=40 height=40 stroke-width=0.5 data-feather="{{ $detail['icon'] }}"></i>
                 <span class="font-semibold">{!! s_trans($title) !!}</span>
             </a>
             @endforeach
-            <a href="#" class="tile shadow-lg bg-brand text-white py-3 px-4 h-[60px]">
+            {{-- <a href="#" class="tile shadow-lg bg-brand text-white py-3 px-4 h-[60px]">
                 <i class="absolute bottom-3 right-4" width=40 height=40 stroke-width=0.5 data-feather="file-text"></i>
                 <span class="font-semibold">E-nəticə</span>
+            </a> --}}
+            <a href="tel:{{ str_replace(' ', '', $s_details['ambulance'][0]['name']) }}" class="col-span-2 my-1 md:col-span-1 tile flex-col bg-red-400 text-white py-3 px-4 h-[90px]">
+                <img src="{{ asset('front/img/ambulance2.webp') }}" class="tile-bg ambulance-bg" alt="ambulance_image">
+                <div class="font-semibold">{!! s_trans('ambulans-basliq', true) !!}</div>
+                <div class="text-sm w-2/3 opacity-75">{!! s_trans('ambulans-alt-basliq') !!}</div>
             </a>
         </div>
 

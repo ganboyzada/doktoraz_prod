@@ -1,8 +1,8 @@
 @extends('front.layouts.master')
 
 @section('page_title', s_trans('xeberler_meta_basliq'))
-@section('meta_tags', $translations[$page_meta->meta_tags])
-@section('meta_desc', $translations[$page_meta->meta_desc])
+@section('meta_tags', translate($page_meta->meta_tags))
+@section('meta_desc', translate($page_meta->meta_desc))
 
 @section('main')
 <div class="px-4 md:px-0 flex gap-4 items-center mb-4">
@@ -25,12 +25,12 @@
                         <i data-feather="calendar" height=20 width=20></i> 
                         <span class="pt-[2px]">{{ \Carbon\Carbon::parse($post->created_at)->format('d.m.Y') }} </span>
                     </div>
-                    <h3 class="title text-lg font-semibold">{{ $translations[$post->title] }}</h3>
+                    <h3 class="title text-lg font-semibold">{{ translate($post->title) }}</h3>
                     <div class="excerpt text-xs opacity-75">
-                        {!! strip_tags($translations[$post->excerpt], true) !!}
+                        {!! strip_tags(translate($post->excerpt), true) !!}
                     </div>
                     
-                    <span class="mt-2 px-4 btn btn-waterdrop text-sm">{{ s_trans('Read more') }}</span>
+                    <span class="mt-2 px-4 btn btn-waterdrop text-sm">{{ s_trans('Məlumat al') }}</span>
                 </div>
             </div>
         </a>

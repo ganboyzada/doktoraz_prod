@@ -8,6 +8,7 @@ import Swiper from 'swiper';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
+import 'swiper/css/grid';
 import { Navigation, Pagination, Grid, Autoplay } from 'swiper/modules';
 
 // Replace all <i data-feather="icon-name"></i> with SVGs
@@ -67,7 +68,8 @@ new Swiper('#home_slider', {
 const swiper = new Swiper('#doc_slider', {
   modules: [Navigation, Pagination],
     spaceBetween: 10,                 // adjust gap if you like
-    slidesPerView: 3.1,               // 3 full + ~10% of next on larger screens
+    slidesPerView: 3.1, 
+    autoHeight: true,
     navigation: {
       nextEl: '.swiper-button-next',
       prevEl: '.swiper-button-prev',
@@ -81,14 +83,15 @@ const swiper = new Swiper('#doc_slider', {
       // tablet & up – 3 full slides + ~10% of the 4th
       1024: { slidesPerView: 2.4 },
       1280: { slidesPerView: 1.7 },
-      1536: { slidesPerView: 2.4 }
+      1536: { slidesPerView: 2.2 }
     }
   });
 
 const swiper2 = new Swiper('#gallery_slider', {
   modules: [Navigation, Pagination, Grid],
     spaceBetween: 10,
-    slidesPerView: 1.2, 
+    slidesPerView: 1, 
+    slidesPerGroup: 1,
     grid: {
       rows: 1,
       fill: 'row'
@@ -98,20 +101,23 @@ const swiper2 = new Swiper('#gallery_slider', {
     breakpoints: {
       // mobile – 2 full slides + ~10% of the 3rd
       768:   {
-        slidesPerView: 1.2,
+        slidesPerView: 1,
+        slidesPerGroup: 3,
         grid: {
           rows: 3,
         },
       },
       // tablet & up – 3 full slides + ~10% of the 4th
       1024: {
-        slidesPerView: 1.2,
+        slidesPerView: 2,
+        slidesPerGroup: 8,
         grid: {
-          rows: 3,
+          rows: 4,
         },
       },
       1280: {
         slidesPerView: 3,
+        slidesPerGroup: 9,
         grid: {
           rows: 3,
         },

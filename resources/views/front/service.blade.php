@@ -1,6 +1,6 @@
 @extends('front.layouts.master')
 
-@section('page_title', $translations[$service->name].' - Doktor.az Klinika')
+@section('page_title', translate($service->name).' - Doktor.az Klinika')
 
 @section('main')
 
@@ -19,8 +19,8 @@
                     {{ s_trans('Bütün şöbələr') }}
                 </a>
                 <div class="mt-auto">
-                    <h2 class="mt-6 md:mt-0 text-3xl xl:text-4xl font-semibold">{{ $translations[$service->name] }}</h2>
-                    <div class="mt-2 lg:mt-3 opacity-75">Ürək və qan dövranı müayinələri</div>
+                    <h2 class="mt-6 md:mt-0 text-3xl xl:text-4xl font-semibold">{{ translate($service->name) }}</h2>
+                    <div class="mt-2 lg:mt-3 opacity-75">{{ translate($service->department->name) }}</div>
                 </div>
             </div>
             <div class="tile block row-span-7 2xl:row-span-6 pl-3 md:pl-6 pr-0 pt-0 pb-6">
@@ -31,8 +31,9 @@
                     </div>
                     <div class="swiper-wrapper">
                         @foreach ($service->members as $k=>$doctor)
-                        <a class="swiper-slide doctor" href="{{ loc_route('doctors.find', $doctor->slug) }}">
-                            <div class="doc-name text-sm"><b>{{ $doctor->first_name.' '.$doctor->last_name }}</b><br>{{ $translations[$doctor->designation] }}</div>
+                        <a class="swiper-slide doctor text-sm" href="{{ loc_route('doctors.find', $doctor->slug) }}">
+                            <div class="doc-name mb-1"><b>{{ $doctor->first_name.' '.$doctor->last_name }}</b></div>
+                            <div>{{ translate($doctor->designation) }}</div>
                             <img src="{{ media($doctor->photo) }}" alt="">
                             <span class="btn btn-waterdrop btn-doc-detail"><i data-feather="info"></i></span>
                         </a>
@@ -44,6 +45,8 @@
                     <div class="swiper-button-next"></div>
                     
                 </div>
+                @else
+                    @include('front.layouts.notfound')
                 @endif
             </div>
         </div>
@@ -57,7 +60,12 @@
                 <div class="overflow-y-scroll h-full min-h-72">
                     <div class="h-[100px] leading-7">
                         <div class="pb-[150px]">
-                            {!! $translations[$service->desc] !!}
+                            
+                            @if(translate($service->desc))
+                                {!! translate($service->desc) !!}
+                            @else
+                                @include('front.layouts.notfound')
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -87,7 +95,7 @@
         </div>    
         <div class="col-span-12 lg:col-span-12 xl:col-span-3 2xl:col-span-3 tile flex-col py-6 has-read-more">
             <div class="mb-4 px-6">
-                <div class="mb-1 opacity-75">{{ $translations[$service->department->name] }}</div>
+                <div class="mb-1 opacity-75">{{ translate($service->department->name) }}</div>
                 <h2 class="text-xl font-semibold">{{ s_trans('Digər sahələr') }}</h2>
             </div>
             <div class="service-tiles grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-1 2xl:grid-cols-1 gap-2 auto-rows-[60px] overflow-y-scroll pb-32 px-6">
@@ -98,7 +106,7 @@
                     @endif
                     <div class="tile-title">
                         
-                        {{ $translations[$rel_service->name] }} 
+                        {{ translate($rel_service->name) }} 
                     </div>
                 </a>   
                 @endforeach

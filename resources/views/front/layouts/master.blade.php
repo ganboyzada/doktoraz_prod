@@ -5,6 +5,7 @@
 <html class="no-js" lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="UTF-8">
+    <meta name="color-scheme" content="light dark">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>@yield('page_title', 'DOKTOR AZ KLİNİKASI – Sumqayıt | Terapiya, Ginekologiya, Kardiologiya')</title>
@@ -26,11 +27,16 @@
 	
     <link rel="manifest" href="{{ asset('manifest.json') }}">
 
+    <link rel="stylesheet" href="{{ asset('front/css/preloader.css') }}">
+
     @vite(['resources/scss/app.scss','resources/js/app.js'])
 
     @stack('css')
 </head>
 <body class="sm:h-screen sm:max-h-screen py-7 px-1 sm:px-5 xl:px-10 2xl:px-16 antialiased">
+    
+    @include('front.includes.preloader')
+
     @include('front.layouts.header')
 
     @yield('main')
@@ -38,5 +44,8 @@
     @include('front.layouts.footer')
 
     @stack('js')
+
+    <script src="{{ asset('front/js/preloader.js') }}"></script>
+
 </body>
 </html>

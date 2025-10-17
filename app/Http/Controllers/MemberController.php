@@ -78,8 +78,9 @@ class MemberController extends Controller
             'designation'=>[
                 'type'=>'trans',
             ],
-            'phone'=>[
+            'category_id'=>[
                 'type'=>'text',
+                'model'=>'\Category'
             ],
             
         ];

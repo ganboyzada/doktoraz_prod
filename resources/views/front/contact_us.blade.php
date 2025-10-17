@@ -1,8 +1,8 @@
 @extends('front.layouts.master')
 
 @section('page_title', s_trans('Əlaqə').' - Amerikan Aptek')
-@section('meta_tags', $translations[$page_meta->meta_tags])
-@section('meta_desc', $translations[$page_meta->meta_desc])
+@section('meta_tags', translate($page_meta->meta_tags))
+@section('meta_desc', translate($page_meta->meta_desc))
 
 @push('css')
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGIJ_1dEU3NTyEJJeUQ5UZhn56pL0W0M4"></script>
@@ -44,8 +44,8 @@
                                                 <li class="branch py-3">
                                                     <i class="address-icon bi bi-geo"></i>
                                                     <div>
-                                                        <h6 class="mb-1">{{ $translations[$branch->name] }}</h6>
-                                                        {!! $translations[$branch->address] !!}
+                                                        <h6 class="mb-1">{{ translate($branch->name) }}</h6>
+                                                        {!! translate($branch->address) !!}
                                                         <div style="font-size: 0.9rem;">
                                                             @isset($branch->mobile_phone)
                                                             <a class="branch-phone mt-2 d-block" href="tel:{{ $branch->mobile_phone }}">
@@ -64,7 +64,7 @@
                                                 </li>
                                                     @php
                                                     $map_pins[] = [
-                                                        'name' => $translations[$branch->name],
+                                                        'name' => translate($branch->name),
                                                         'address' => $branch->coordinates,
                                                         'work_hours' => $branch->work_hours,
                                                         'phone' => $branch->mobile_phone,

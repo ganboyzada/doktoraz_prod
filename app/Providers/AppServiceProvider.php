@@ -33,9 +33,8 @@ class AppServiceProvider extends ServiceProvider
         Paginator::defaultView('vendor.pagination.tailwind');
         Blade::anonymousComponentNamespace('inno.components','inno');
         Blade::anonymousComponentNamespace('inno.layouts','innolayout');
-        View::share('languages', Language::get()->keyBy('code'));
         View::share('socials', Social::get());
-        View::share('settings', Setting::get()->keyBy('label'));
+      
         
         $types = ['mobile','phone','ambulance','address','email', 'whatsapp'];
         $s_details = \App\Models\Content::whereIn('type', $types)
@@ -45,6 +44,7 @@ class AppServiceProvider extends ServiceProvider
                 return $group->values(); // keep as Collection of models (re-indexed)
             })
             ->toArray();
+            
         View::share('s_details', $s_details);
     }
 

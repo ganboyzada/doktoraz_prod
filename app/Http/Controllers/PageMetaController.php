@@ -66,7 +66,8 @@ class PageMetaController extends Controller
         $fields = $this->fields();
         $columns = $this->columns();
 
-        return view('inno.modules.default', compact(['fields', 'module', 'items','columns']));
+        return view('inno.modules.default', compact(['fields', 'module', 'items','columns']))
+            ->with(['options' => $this->options]);;
     }
 
     /**

@@ -53,7 +53,7 @@
                             @endforeach
                         </div>
 
-                    @elseif($config['type']=='text')
+                    @elseif($config['type']=='text' || $config['type']=='slug')
 
                         @if(isset($config['editor']) && $config['editor'])
                             <textarea class="form-control editor" name="{{ $field }}">

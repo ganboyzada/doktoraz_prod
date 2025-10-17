@@ -47,15 +47,18 @@ Route::get('/', function () {
 });
 
 foreach ($languages as $lang) {
-    Route::group(['prefix' => $lang, 'middleware'=>'lang'], function () use ($lang) {
-        Route::get('/', [FrontController::class, 'home'])->name('home.'.$lang);
-        Route::get('/xidmetler', [FrontController::class, 'services'])->name('services.'.$lang);
-        Route::get('/xidmetler/{slug}', [FrontController::class, 'service'])->name('services.find.'.$lang);
-        Route::get('/hekimler', [FrontController::class, 'doctors'])->name('doctors.'.$lang);
-        Route::get('/hekimler/{slug}', [FrontController::class, 'doctor'])->name('doctors.find.'.$lang);
-        Route::get('/xeberler', [FrontController::class, 'blog'])->name('news.'.$lang);
-        Route::get('/xeberler/{slug}', [FrontController::class, 'blogpost'])->name('news.find.'.$lang);
-        Route::get('/haqqimizda', [FrontController::class, 'about_us'])->name('about_us.'.$lang);
+    Route::group([
+        'prefix' => $lang,
+        'middleware' => 'lang:' . $lang
+    ], function () use ($lang) {
+        Route::get('/', [FrontController::class, 'home'])->name("home.$lang");
+        Route::get('/xidmetler', [FrontController::class, 'services'])->name("services.$lang");
+        Route::get('/xidmetler/{slug}', [FrontController::class, 'service'])->name("services.find.$lang");
+        Route::get('/hekimler', [FrontController::class, 'doctors'])->name("doctors.$lang");
+        Route::get('/hekimler/{slug}', [FrontController::class, 'doctor'])->name("doctors.find.$lang");
+        Route::get('/xeberler', [FrontController::class, 'blog'])->name("news.$lang");
+        Route::get('/xeberler/{slug}', [FrontController::class, 'blogpost'])->name("news.find.$lang");
+        Route::get('/haqqimizda', [FrontController::class, 'about_us'])->name("about_us.$lang");
     });
 }
 
