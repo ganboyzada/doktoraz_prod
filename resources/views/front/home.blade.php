@@ -24,7 +24,7 @@
                          {!! translate($slide->title) !!}
                         </div>
                         <a href="{{ $slide->link }}" target="_blank" class="btn btn-primary mt-3 pl-4 pr-5 absolute bottom-6 left-6 font-normal">
-                            <i data-feather="info"></i>
+                            <i data-feather="info" stroke-width=1.5></i>
                             {{ s_trans('Məlumat al') }}</a>
                     </div>
                 </div>
@@ -95,7 +95,7 @@
             </div>
             <div class="contact-details grid grid-cols-2 gap-2 px-[1.6rem] mb-3">
                 <div id="mobile_numbers">
-                    <div class="text-xs lg:text-sm mb-2 opacity-75">{{ s_trans('Mobil xəttlər') }}</div>
+                    <div class="text-sm mb-2 opacity-75">{{ s_trans('Mobil xəttlər') }}</div>
                     <div class="flex flex-col gap-0 border border-green-300 radius-s overflow-hidden">
                         @foreach(($s_details['mobile'] ?? []) as $k=>$mobile)
                         <a class="text-center flex items-center gap-2 text-green-500
@@ -110,7 +110,7 @@
                     </div>
                 </div>
                 <div id="city_numbers" class="mb-1">
-                    <div class="text-xs lg:text-sm mb-2 opacity-75">{{ s_trans('Şəhər xəttləri') }}</div>
+                    <div class="text-sm mb-2 opacity-75">{{ s_trans('Şəhər xəttləri') }}</div>
                     <div class="flex flex-col border border-slate-300 radius-s overflow-hidden">
                     @foreach(($s_details['phone'] ?? []) as $phone)
                     <a class="text-center flex items-center gap-2 opacity-75 hover:bg-green-100 hover:text-green-700 radius-s py-2 px-3" 

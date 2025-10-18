@@ -275,7 +275,7 @@ span.sep.vert{
       margin-top: 0.2rem;
       opacity: 0.6;
       font-weight: 400;
-      font-size: 0.8rem;
+      font-size: 0.9rem;
       line-height: 150%;
       @include lg{
         font-size: 0.9rem;
@@ -366,7 +366,7 @@ span.sep.vert{
       height: 150%;
       aspect-ratio: 1;
       border-radius: 100%;
-      background: radial-gradient(rgba($body, 0.5), transparent 80%);
+      background: radial-gradient(rgba($body, 0.4), transparent 80%);
     }
   }
 

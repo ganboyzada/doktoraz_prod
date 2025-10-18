@@ -71,7 +71,7 @@
     "src": "resources/scss/admin.scss"
   },
   "resources/scss/app.scss": {
-    "file": "assets/app-20beed8c.css",
+    "file": "assets/app-5124ac87.css",
     "isEntry": true,
     "src": "resources/scss/app.scss"
   }
