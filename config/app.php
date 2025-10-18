@@ -102,7 +102,7 @@ return [
         // 'tasks' => 'person',
         // 'inquiries' => 'envelope-arrow-down',
         'socials' => 'share',
-        'branches' => 'share',
+        // 'branches' => 'share',
         // 'social_posts' => 'share',
         'blogs' => 'newspaper',
         // 'faqs' => 'question-circle',
