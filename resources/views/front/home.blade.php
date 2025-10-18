@@ -113,7 +113,7 @@
                     <div class="text-sm mb-2 opacity-75">{{ s_trans('Şəhər xəttləri') }}</div>
                     <div class="flex flex-col border border-slate-300 radius-s overflow-hidden">
                     @foreach(($s_details['phone'] ?? []) as $phone)
-                    <a class="text-center flex items-center gap-2 opacity-75 hover:bg-green-100 hover:text-green-700 radius-s py-2 px-3" 
+                    <a class="text-center flex items-center gap-2 opacity-75 hover:bg-green-100 hover:text-green-500 radius-s py-2 px-3" 
                         href="tel:{{ str_replace(' ', '', $phone['name']) }}">
                         <i data-feather="phone" stroke-width=2 width=20 height=20></i>
                         {{ $phone['name'] }}</a>
