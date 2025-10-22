@@ -8,6 +8,6 @@
         <li><a href="{{ loc_route('services') }}" class="underline">{{s_trans('xidmetler-basliq')}}</a></li>
         <li><a href="{{ loc_route('doctors') }}" class="underline">{{ s_trans('hekimler-basliq')}}</a></li>
         <li><a href="{{ loc_route('news') }}" class="underline">{{s_trans('Xəbərlər')}}</a></li>
-        <li class="ml-3"><a href="https://nexatech.az" class="inline-flex gap-2 font-semibold items-center">Designed by <img src="{{ asset('inno/img/nexa_for_light.svg') }}" class="h-4" alt="nexa_logo"></a></li>
+        <li class="ml-3"><a href="https://nexastudio.az" class="inline-flex gap-2 font-semibold items-center">Designed by <img src="{{ asset('inno/img/nexa_for_light.svg') }}" class="h-4" alt="nexa_logo"></a></li>
     </ul>
 </footer>
